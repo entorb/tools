@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 use strict;
 use warnings;
 use File::Basename;
@@ -48,8 +49,8 @@ my @L = qw (
 # X-KADDRESSBOOK-BLOGFEED
 # X-ICQ
 
-foreach my $cat ( @L ) {
-  $cont =~ s/(?<=\n)$cat[;:].*?\n(?=\w)//sg;    # alles bis zum ersten Zeilenumbuch ohne Leerzeichen, sondern mit Wortzeichen dahinter
+foreach my $cat (@L) {
+    $cont =~ s/(?<=\n)$cat[;:].*?\n(?=\w)//sg;    # alles bis zum ersten Zeilenumbuch ohne Leerzeichen, sondern mit Wortzeichen dahinter
 }
 
 # $cont =~ s/;PREF=1//g;
@@ -57,12 +58,12 @@ foreach my $cat ( @L ) {
 
 my %h;
 while ( $cont =~ m/(?<=\n)(\w[^:]+)[:]/gc ) {
-  $h{ $1 }++;
+    $h{$1}++;
 }
 # by values, reverse
-foreach my $k ( sort { $h{ $b } <=> $h{ $a } } keys( %h ) ) {
-  print "$h{$k}\t$k\n";
-  #last if $h{$k}==1;
+foreach my $k ( sort { $h{$b} <=> $h{$a} } keys(%h) ) {
+    print "$h{$k}\t$k\n";
+    #last if $h{$k}==1;
 }
 
 open( my $fhout, ">", $fileOut ) or die $!;

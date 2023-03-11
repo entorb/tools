@@ -1,43 +1,30 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
+#!/usr/bin/env python3
 """
-reads certain cells from all Excel files found in folder 'input' and creates a report in file out.xlsx
+Read many Excels and write into single report Excel.
+
+Reads certain cells from all Excel files found in folder 'input' and creates a report in file out.xlsx
 cells to readout are configured in .ini file
 """
-
 # Built-in/Generic Imports
-import os
 import glob
+import os
 from configparser import ConfigParser
 
-# Libs
 import openpyxl
+
+# Libs
+
 # see https://openpyxl.readthedocs.io/en/stable/usage.html
 
-# Author and version info
-__author__ = "Dr. Torben Menke"
-__email__ = "https://entorb.net"
-__maintainer__ = __author__
-# __copyright__ = "Copyright 2020, My Project"
-# __credits__ = ["John", "Jim", "Jack"]
-__license__ = "GPL"
-__status__ = "Dev"
-__version__ = "0.1"
 
-print(f"""Excel-Bulk-Readout
-by {__author__}
-{__email__}
-""")
-
-folder_input = 'input'
-file_output = 'out.xlsx'
+dir_input = "input"
+file_output = "out.xlsx"
 
 if os.path.isfile(file_output):
     os.remove(file_output)
 
 config = ConfigParser()
-config.read('excel_readout.ini', encoding='utf-8')
+config.read("excel_readout.ini", encoding="utf-8")
 
 # read the config and store the location of the cells to extract into a list
 # list containing the cells to extract as tuple: (section, key,value) e.g. ("Sheet1", "A3", "NameForA3")
@@ -50,10 +37,10 @@ l = config.sections()
 for sheet in config.sections():
     lSheetsToReadout.append(sheet)  # = sheet name
     lCellsToReadout = []
-    for cell_location in config.options(sheet):
-        cell_title = config.get(sheet, cell_location)
+    for _cell_location in config.options(sheet):
+        cell_title = config.get(sheet, _cell_location)
         # = B9 = Title for Cells B9
-        lCellsToReadout.append((cell_location, cell_title))
+        lCellsToReadout.append((_cell_location, cell_title))
     dCellsToReadoutPerSheet[sheet] = lCellsToReadout
 
 
@@ -69,15 +56,15 @@ cellOut.value = "file"
 for sheet_name in lSheetsToReadout:
     colOut += 1
     cellOut = sheetOut.cell(row=rowOut, column=colOut)
-    cellOut.value = 'sheet'
-    for (cell_location, cell_title) in dCellsToReadoutPerSheet[sheet_name]:
+    cellOut.value = "sheet"
+    for (_cell_location, cell_title) in dCellsToReadoutPerSheet[sheet_name]:
         colOut += 1
         cellOut = sheetOut.cell(row=rowOut, column=colOut)
         cellOut.value = cell_title
 
 
 # loop over all Excel files in dir "input"
-for filepath in glob.glob(folder_input + "/" + "*.xls*"):
+for filepath in glob.glob(dir_input + "/" + "*.xls*"):
     (dirName, fileName) = os.path.split(filepath)
 
     # open Excel file
@@ -94,7 +81,7 @@ for filepath in glob.glob(folder_input + "/" + "*.xls*"):
         colOut += 1
         cellOut = sheetOut.cell(row=rowOut, column=colOut)
         cellOut.value = sheet_name
-        for (cell_location, cell_title) in dCellsToReadoutPerSheet[sheet_name]:
+        for (cell_location, _cell_title) in dCellsToReadoutPerSheet[sheet_name]:
             colOut += 1
             sheetIn = workbook[sheet_name]
             cellIn = sheetIn[cell_location]

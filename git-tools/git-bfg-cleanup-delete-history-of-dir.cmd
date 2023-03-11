@@ -22,9 +22,9 @@ cd %myRepoName%
 REM DL from https://rtyley.github.io/bfg-repo-cleaner/
 
 move cache ..\bfg-backup-dirs\
-java -jar ../bfg-1.14.0.jar --delete-folders cache 
+java -jar ../bfg-1.14.0.jar --delete-folders cache
 move data ..\bfg-backup-dirs\
-java -jar ../bfg-1.14.0.jar --delete-folders data 
+java -jar ../bfg-1.14.0.jar --delete-folders data
 pause
 
 git reflog expire --expire=now --all

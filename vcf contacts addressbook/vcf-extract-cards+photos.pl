@@ -35,7 +35,7 @@ my $outputfolder = $fileIn;
 $outputfolder =~ s/\.vcf$//;
 mkdir $outputfolder unless -d $outputfolder;
 
-open(my $fhIn, '<:encoding(UTF-8)', $fileIn) 
+open(my $fhIn, '<:encoding(UTF-8)', $fileIn)
 or die encode $encodingSay, "ERROR: Can't read from file '$fileIn': $!";
 # binmode ($fhIn, ":encoding(UTF-8)");
 my $cont = join '',<$fhIn>;
@@ -53,10 +53,10 @@ foreach my $vcard (@L) {
     $fn = $1;
   } else {
     die encode $encodingSay, "ERROR: 'FN:' not found in card: \n'$vcard'\n";
-  } 
+  }
   $fn =~ s/\\,/,/g;
   $fn =~ s/[^\w ]+//g; # remove /,\ and other non-word-chars
-  
+
   # say encoding $encodingSay, $fn;
 
   my $fileOut = encode $encodingFileSystem, "$outputfolder/$fn.vcf";
@@ -66,7 +66,7 @@ foreach my $vcard (@L) {
   my $photo;
   if ($vcard =~ m/\nPHOTO[^:]*:(.*?)(?=\n[A-Z\-]+[:;])/s) {
   $photo = $1;
-  if (defined($photo)) {  
+  if (defined($photo)) {
     my $photoOut = $fileOut;
     $photoOut =~ s/\.vcf$/.jpg/;
     print $photoOut;
