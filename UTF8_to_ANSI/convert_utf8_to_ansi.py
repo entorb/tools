@@ -1,7 +1,11 @@
+#!/usr/bin/env python3
+"""
+Convert UTF8 to ANSI.
+"""
 import glob
 import os
 
-for d in ('in', 'out', 'done', 'error'):
+for d in ("in", "out", "done", "error"):
     os.makedirs(d, exist_ok=True)  # = mkdir -p
 
 for f in glob.glob("in/*.*"):
@@ -9,14 +13,14 @@ for f in glob.glob("in/*.*"):
     print(fileName)
 
     try:
-        with open(f, mode='r', encoding='utf-8') as fh:
+        with open(f, encoding="utf-8") as fh:
             cont = fh.read()
     except UnicodeEncodeError:
         os.rename(f, f"error/{fileName}")
         print(f"ERROR reading '{fileName}' as UTF-8")
 
     try:
-        with open(f"out/{fileName}", mode='w', encoding='ansi', newline='\r\n') as fh:
+        with open(f"out/{fileName}", mode="w", encoding="ansi", newline="\r\n") as fh:
             fh.write(cont)
         os.rename(f, f"done/{fileName}")
     except UnicodeEncodeError:
