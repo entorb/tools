@@ -3,3 +3,4 @@ __pycache__/
 
 bfg-*.jar
 test.py
+.DS_Store
