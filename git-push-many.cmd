@@ -2,9 +2,9 @@
 
 cd ..
 
-FOR /D %%D in ("*") DO (
+REM FOR /D %%D in ("*") DO (
 REM FOR /D %%D in (private, tools, tools-backup-scripts, tools-photos) DO (
-REM FOR /D %%D in (tools) DO (
+FOR /D %%D in (tools) DO (
 
 echo ===
 echo === %%D ====
