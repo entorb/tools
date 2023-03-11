@@ -1,4 +1,3 @@
-import itertools as it
 import random
 
 
@@ -38,7 +37,7 @@ def gen_rand_playorder(amount_of_songs: int, num_steps: int) -> list:
     return playorder
 
 
-amount_of_songs = 100
+amount_of_songs = 20
 amount_of_songs_80pct = round(amount_of_songs*0.8, 0)
 test_loops = 1000
 # num_steps = 6
