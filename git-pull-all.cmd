@@ -1,9 +1,10 @@
 @echo off
 
 D:
-cd D:\GitHub\entorb
+cd D:\GitHub
 
 FOR /D %%D in ("*") DO (
+
 echo ===
 echo === %%D ====
 echo ===
