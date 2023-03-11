@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # 1. create empty backup repo in GitHub
 # e.g. COVID-19-Coronavirus-German-Regions-OLD-DATA-BACKUP-220730.git
 
