@@ -10,7 +10,7 @@ for D in $(ls -d */); do
     cd $D
     if [ -f $FILE ]; then
         echo $D
-        cp ../tools/git-tools/pre-commit/$FILE ./$FILE
+        cp ../tools/pre-commit/$FILE ./$FILE
     fi
     cd ..
 done
