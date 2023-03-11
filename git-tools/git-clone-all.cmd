@@ -6,6 +6,7 @@ git clone https://github.com/entorb/dissertation
 git clone https://github.com/entorb/HackerRank
 git clone https://github.com/entorb/game-robot
 git clone https://github.com/entorb/hpmor-ebook
+git clone https://github.com/entorb/perscheid
 git clone https://github.com/entorb/private
 git clone https://github.com/entorb/raspi-sensorics
 git clone https://github.com/entorb/rememberthemilk
