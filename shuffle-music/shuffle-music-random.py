@@ -78,7 +78,7 @@ def loop_over_rand_playorders(total_songs: int, num_songs_played: int, num_test_
 
 
 if __name__ == '__main__':
-    total_songs = 100
+    total_songs = 20
     num_test_loops = 1000
     time_start = time.time()
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     # multi processing
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count()-1)
     l_pile_of_work = []
-    for num_songs_played in range(int(total_songs*0.8), int(4*total_songs+1)):
+    for num_songs_played in range(int(total_songs*0.8), int(5*total_songs+1)):
         L2 = (total_songs, num_songs_played, num_test_loops)
         l_pile_of_work.append(L2)
     results = pool.starmap(loop_over_rand_playorders, l_pile_of_work)
