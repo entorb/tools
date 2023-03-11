@@ -32,7 +32,8 @@ repos:
       - id: detect-private-key
       # conflict with black below
       # - id: double-quote-string-fixer
-      - id: end-of-file-fixer
+      # not: since it conflicts with python gen. json files
+      # - id: end-of-file-fixer
       - id: file-contents-sorter
       - id: fix-byte-order-marker
       - id: fix-encoding-pragma
@@ -43,8 +44,9 @@ repos:
       - id: name-tests-test
       # - id: no-commit-to-branch
       #   args: [--branch, staging]
-      - id: pretty-format-json
-        args: ["--autofix"]
+      # not, since it decodes utf-8
+      # - id: pretty-format-json
+      #   args: ["--autofix"]
       - id: requirements-txt-fixer
       # - id: sort-simple-yaml
       - id: trailing-whitespace
@@ -59,16 +61,18 @@ repos:
     hooks:
       - id: black
 
-  - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: v2.0.1
-    hooks:
-      - id: autopep8
+  # not, black is enough
+  # - repo: https://github.com/pre-commit/mirrors-autopep8
+  #   rev: v2.0.1
+  #   hooks:
+  #     - id: autopep8
 
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.9.0
     hooks:
       - id: python-check-blanket-noqa
-      - id: python-check-blanket-type-ignore
+      # not, since '# type: ignore' is ok for me
+      # - id: python-check-blanket-type-ignore
       - id: python-check-mock-methods
       - id: python-no-eval
       - id: python-no-log-warn
