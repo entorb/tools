@@ -67,7 +67,9 @@ def loop_over_rand_playorders(
 
 
 def plot_results(
-    total_songs: int, num_test_loops: int, results: tuple[int, float, float]
+    total_songs: int,
+    num_test_loops: int,
+    results: tuple[int, float, float],
 ) -> None:
     df = pd.DataFrame(
         data=results,
@@ -103,7 +105,8 @@ def plot_results(
 
 
 def run_simulation_single_processing(
-    total_songs: int, num_test_loops: int
+    total_songs: int,
+    num_test_loops: int,
 ) -> tuple[tuple[int, float, float]]:
     results: list[tuple[int, float, float]] = []
     for num_songs_played in range(total_songs, 5 * total_songs + 1):
