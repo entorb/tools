@@ -7,7 +7,7 @@ do
     echo ===
     cd $D
     git add .
-    git commit -m "improvements"
+    git commit -m "chmod u+x"
     git push
     cd ..
 done
