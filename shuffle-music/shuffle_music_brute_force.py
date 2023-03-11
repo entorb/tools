@@ -2,27 +2,12 @@ import itertools as it
 import math
 import time
 
+import shuffle_music_lib
+
 # FINDING:
 # 10^20 = 1.0e+20 combinations -> no brute force solution possible
 
 # TODO use multiprocessing to speed up
-
-
-def check_all_played(total_songs: int, playorder: list) -> bool:
-    """
-    checks if all songs are played = in playorder
-    returns true if so, else false
-    """
-    for song in range(total_songs):
-        if song not in playorder:
-            return False
-    return True
-
-
-def check_cnt_unique_played(playorder: list) -> int:
-    """ counts how many different songs are played """
-    cnt_unique_played = set(playorder)  # set is a unique list
-    return len(cnt_unique_played)
 
 
 total_songs = 6
@@ -37,9 +22,9 @@ cnt_80pct_played = 0
 
 timestart = time.time()
 for playorder in it.product(range(total_songs), repeat=num_songs_played):
-    if check_all_played(total_songs=total_songs, playorder=playorder):
+    if shuffle_music_lib.check_all_played(total_songs=total_songs, playorder=playorder):
         cnt_all_played += 1
-    if check_cnt_unique_played(playorder=playorder) >= total_songs_80pct:
+    if shuffle_music_lib.check_cnt_unique_played(playorder=playorder) >= total_songs_80pct:
         cnt_80pct_played += 1
         # print(tup)
 duration = time.time() - timestart
