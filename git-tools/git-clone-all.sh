@@ -1,3 +1,4 @@
+git clone https://github.com/entorb/aktien
 git clone https://github.com/entorb/analyze-apple-health
 git clone https://github.com/entorb/analyze-oura
 git clone https://github.com/entorb/analyze-apple-health
