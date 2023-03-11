@@ -2,20 +2,20 @@
 """
 Read many Excels and write into single report Excel.
 
-Reads certain cells from all Excel files found in folder 'input' and creates a report in file out.xlsx
-cells to readout are configured in .ini file
+* read all Excel files in dir `input`
+* extract certain cells and
+* write into single report Excel `out.xlsx`
+
+configure in `excel_readout.ini`
+
+see README.md
 """
-# Built-in/Generic Imports
+
 import glob
 import os
 from configparser import ConfigParser
 
 import openpyxl
-
-# Libs
-
-# see https://openpyxl.readthedocs.io/en/stable/usage.html
-
 
 dir_input = "input"
 file_output = "out.xlsx"
