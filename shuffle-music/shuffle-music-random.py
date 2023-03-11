@@ -72,9 +72,7 @@ def loop_over_rand_playorders(total_songs: int, num_songs_played: int, num_test_
 
 
 if __name__ == '__main__':
-    #    freeze_support()
-
-    total_songs = 20
+    total_songs = 100
     num_test_loops = 1000
     time_start = time.time()
 
@@ -118,12 +116,19 @@ if __name__ == '__main__':
     )
     df.set_index(['num_songs_played'], inplace=True)
     # print(df.head())
-    myPlot = df.plot(legend=True, linewidth=2.0, zorder=1, figsize=(8, 6))
-    myPlot.set_ylim(0, 100)
-    plt.title(f'Shuffling {total_songs} Songs')
+
+    fig, axes = plt.subplots(figsize=(8, 6))
+    df['pct_80pct_played'].plot(linewidth=2.0, legend=True, zorder=1)
+    df['pct_all_played'].plot(linewidth=2.0, legend=True, zorder=2)
+    axes.set_ylim(0, 100)
+    import matplotlib.ticker as mtick
+    axes.yaxis.set_major_formatter(mtick.PercentFormatter())
+    plt.legend(['prob. 80% played', 'prob. all played'])
+    plt.title(
+        f'Shuffling {total_songs} Songs (simulation of {num_test_loops} randomized loops)')
     plt.xlabel(f"Songs Played")
-    plt.ylabel(f"Probability (%)")
+    plt.ylabel(f"Probability")
     plt.grid(zorder=-1)
     plt.tight_layout()
-    plt.savefig(fname=f'shuffle-music-random-%03d.png' %
+    plt.savefig(fname=f'shuffle-music/shuffle-music-random-%03d.png' %
                 total_songs, format='png')
