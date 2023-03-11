@@ -11,7 +11,7 @@ git clone --bare %myRepoBaseURL%%myRepoName%
 
 REM 2. cleanup
 cd %myRepoName%
-REM DL form from https://rtyley.github.io/bfg-repo-cleaner/
+REM DL from https://rtyley.github.io/bfg-repo-cleaner/
 java -jar ../bfg-1.14.0.jar --delete-folders %myDirToDelete%
 git reflog expire --expire=now --all
 git gc --prune=now --aggressive
