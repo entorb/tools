@@ -6,14 +6,14 @@ import multiprocessing
 import os
 
 
-def worker(i: int, s: str) -> list:
+def worker(i: int, s: str) -> tuple[int, str, int]:
     result = (i, s, os.getpid())
     return result
 
 
 if __name__ == "__main__":
     # gen. pile of work
-    l_pile_of_work = []
+    l_pile_of_work: list[tuple[int, str]] = []
     for i in range(1_000):
         tup = (i, "n" + str(i))
         l_pile_of_work.append(tup)

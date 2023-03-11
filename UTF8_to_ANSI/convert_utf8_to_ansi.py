@@ -18,6 +18,7 @@ for f in glob.glob("in/*.*"):
     except UnicodeEncodeError:
         os.rename(f, f"error/{fileName}")
         print(f"ERROR reading '{fileName}' as UTF-8")
+        exit()
 
     try:
         with open(f"out/{fileName}", mode="w", encoding="ansi", newline="\r\n") as fh:

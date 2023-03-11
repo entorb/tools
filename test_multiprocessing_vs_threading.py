@@ -10,7 +10,7 @@ import threading
 import time
 
 
-def worker_core(i: int, s: str) -> list:
+def worker_core(i: int, s: str) -> tuple[int, str, int]:
     """
     For worker_core_cpu and worker_core_io.
     """
@@ -19,7 +19,7 @@ def worker_core(i: int, s: str) -> list:
     return result
 
 
-def worker_core_cpu(i: int, s: str) -> list:
+def worker_core_cpu(i: int, s: str) -> tuple[int, str, int]:
     """
     For all CPU limited worker implementations.
     """
@@ -30,7 +30,7 @@ def worker_core_cpu(i: int, s: str) -> list:
     return result
 
 
-def worker_core_io(i: int, s: str) -> list:
+def worker_core_io(i: int, s: str) -> tuple[int, str, int]:
     """
     For all I/O limited worker implementations.
     """
@@ -39,14 +39,14 @@ def worker_core_io(i: int, s: str) -> list:
     return result
 
 
-def worker_multiprocessing_1(i: int, s: str) -> list:
+def worker_multiprocessing_1(i: int, s: str) -> tuple[int, str, int]:
     return worker_core_cpu(i=i, s=s)
 
 
 def worker_multiprocessing_2(
     q_work: multiprocessing.Queue,
     q_results: multiprocessing.Queue,
-):
+) -> None:
     """
     Not faster than multiprocessing_1.
     """
@@ -56,7 +56,7 @@ def worker_multiprocessing_2(
         q_results.put(result)
 
 
-def worker_threading_1(q_work: queue.Queue, results: dict):
+def worker_threading_1(q_work: queue.Queue, results: dict) -> None:
     """For threading_1."""
     while not q_work.empty():
         i, s = q_work.get()
@@ -65,7 +65,7 @@ def worker_threading_1(q_work: queue.Queue, results: dict):
         q_work.task_done()
 
 
-def multiprocessing_1(l_pile_of_work: list):
+def multiprocessing_1(l_pile_of_work: list) -> list[tuple[int, str, int]]:
     """
     For CPU limited tasks.
     """
