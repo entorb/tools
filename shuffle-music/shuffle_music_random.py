@@ -18,7 +18,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import shuffle_music_lib
 
-
 # TODO
 # generated random data -> file and re-generate only when not existing to speepup the plotting
 
@@ -27,21 +26,21 @@ import shuffle_music_lib
 # use pandas and matplotlib zu draw charts
 
 
-def gen_rand_playorder(total_songs: int, num_songs_played: int) -> list:
+def gen_rand_playorder(total_songs: int, num_songs_played: int) -> tuple[int]:
     """
     Generate a list of random playorder.
     """
-    playorder = []
+    playorder: list[int] = []
     for _step in range(num_songs_played):
         playorder.append(random.randint(0, total_songs - 1))  # noqa: S311
-    return playorder
+    return tuple(playorder)
 
 
 def loop_over_rand_playorders(
     total_songs: int,
     num_songs_played: int,
     num_test_loops: int,
-):
+) -> tuple[int, float, float]:
     total_songs_80pct = round(total_songs * 0.8, 0)
     cnt_all_played = 0
     cnt_80pct_played = 0
@@ -67,7 +66,9 @@ def loop_over_rand_playorders(
     return result
 
 
-def plot_results(total_songs: int, num_test_loops: int, results: list):
+def plot_results(
+    total_songs: int, num_test_loops: int, results: tuple[int, float, float]
+) -> None:
     df = pd.DataFrame(
         data=results,
         columns=(
@@ -101,8 +102,10 @@ def plot_results(total_songs: int, num_test_loops: int, results: list):
     )
 
 
-def run_simulation_single_processing(total_songs: int, num_test_loops: int) -> list:
-    results = []
+def run_simulation_single_processing(
+    total_songs: int, num_test_loops: int
+) -> tuple[tuple[int, float, float]]:
+    results: list[tuple[int, float, float]] = []
     for num_songs_played in range(total_songs, 5 * total_songs + 1):
         result = loop_over_rand_playorders(
             total_songs=total_songs,
@@ -110,7 +113,7 @@ def run_simulation_single_processing(total_songs: int, num_test_loops: int) -> l
             num_test_loops=num_test_loops,
         )
         results.append(result)
-    return results
+    return tuple(results)
 
 
 def run_simulation_multi_processing(total_songs: int, num_test_loops: int) -> list:
@@ -130,7 +133,7 @@ if __name__ == "__main__":
     total_songs = 6
     num_test_loops = 10_000
 
-    results = []
+    results: list = []
 
     time_start = time.time()
     # results = run_simulation_single_processing(
