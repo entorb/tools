@@ -1,7 +1,8 @@
+import sys
 import itertools
 
-target = 25.6
 hanteln = (20, 10, 5, 2, 2, 2.5, 1.5)
+
 
 # all combinations via Cartesian product
 hanteln = sorted(hanteln, reverse=True)
@@ -32,22 +33,41 @@ for combination in combinations_all:
             combinations_unique[s] = combination
 del combinations_all, s, combination
 
-# find closest combinations
-match_lower = (0, ())
-match_higher = (10000000, ())
-for s in combinations_unique.keys():
-    if s <= target and s > match_lower[0]:
-        match_lower = (s, combinations_unique[s])
-    elif s > target and s < match_higher[0]:
-        match_higher = (s, combinations_unique[s])
-del s, combinations_unique
+# remove argv[0] = py file
+targets = list(sys.argv[1:])
+for target in targets:
+    target = float(target)
 
-print("%.1f : target" % target)
-if match_lower[0] > 0:
-    print("%.1f : %+.1f" %
-          (match_lower[0], match_lower[0]-target)
-          + f" via {match_lower[1]}")
-if match_higher[0] < 10000000:
-    print("%.1f : %+.1f" %
-          (match_higher[0], match_higher[0]-target)
-          + f" via {match_higher[1]}")
+    # find closest combinations
+    match_lower = (0, ())
+    match_higher = (10000000, ())
+    for s in combinations_unique.keys():
+        if s <= target and s > match_lower[0]:
+            match_lower = (s, combinations_unique[s])
+        elif s > target and s < match_higher[0]:
+            match_higher = (s, combinations_unique[s])
+    del s
+
+    deltaLow = 10000000
+    deltaHigh = 10000000
+    # print("%.1f : target" % target)
+    if match_lower[0] > 0:
+        # print("%.1f : %+.1f" %
+        #       (match_lower[0], match_lower[0]-target)
+        #       + f" via {match_lower[1]}")
+        deltaLow = target - match_lower[0]
+    if match_higher[0] < 10000000:
+        # print("%.1f : %+.1f" %
+        #       (match_higher[0], match_higher[0]-target)
+        #       + f" via {match_higher[1]}")
+        deltaHigh = match_higher[0]-target
+    if deltaLow < deltaHigh:
+        print("%.1f -> %.1f" %
+              (target, match_lower[0])
+              + f" via {match_lower[1]}")
+        deltaLow = target - match_lower[0]
+    else:
+        print("%.1f -> %.1f" %
+              (target, match_higher[0])
+              + f" via {match_higher[1]}")
+        deltaHigh = match_higher[0]-target
