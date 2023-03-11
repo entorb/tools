@@ -1,19 +1,16 @@
 @echo off
-REM erst mal den SSH Key für den Rechner im Putty Pageant entsprerren und laden, dann funktioniert der Zugriff
+
+REM first open and unlock the SSH Key for the computer via Putty Pageant
 
 D:
-cd D:\GitHub\entorb
+cd D:\GitHub
 
-REM git clone git@github.com:entorb/arduino-sensorics
-REM git clone git@github.com:entorb/COVID-19-Coronavirus-German-Regions
-REM git clone git@github.com:entorb/HackerRank
-REM git clone git@github.com:entorb/private
-REM git clone git@github.com:entorb/raspi-sensorics
-REM git clone git@github.com:entorb/rememberthemilk
-REM git clone git@github.com:entorb/strava
-REM git clone git@github.com:entorb/tools
-REM git clone git@github.com:entorb/tools-backup-scripts
-REM git clone git@github.com:entorb/tools-photos
-REM git clone git@github.com:entorb/twitter-gov-accounts
+FOR %%D in (arduino-sensorics, COVID-19-Coronavirus-German-Regions, HackerRank, private, raspi-sensorics, rememberthemilk, sql2csv, tools, tools-backup-scripts, tools-photos, twitter-gov-accounts) DO (
+
+echo ===
+echo === %%D ====
+echo ===
+git clone https://github.com/entorb/%%D
+)
 
 pause

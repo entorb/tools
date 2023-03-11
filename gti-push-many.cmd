@@ -1,15 +1,19 @@
 @echo off
 
 D:
-cd D:\GitHub\entorb
+cd D:\GitHub
 
-FOR /D %%D in (private, tools, tools-backup-scripts, tools-photos) DO (
+REM FOR /D %%D in ("*") DO (
+REM FOR /D %%D in (private, tools, tools-backup-scripts, tools-photos) DO (
+FOR /D %%D in (tools) DO (
+
 echo ===
 echo === %%D ====
 echo ===
 cd %%D
 git add .
-git commit -m "added more files"
+REM git commit -m "added more files"
+git commit -m "improvements"
 git push
 cd ..
 )
