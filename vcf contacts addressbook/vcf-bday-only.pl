@@ -29,13 +29,8 @@ if ( $^O eq 'MSWin32' ) {
 # Modules: File Access
 use File::Basename;
 
-# Start
-our $VERSION = '2020-01-24';
-
 # TODO: enter your data
-my $fileIn                  = 'd:\Archiv\Kontakte\2021\ab-torben-nc-2021-08-09.vcf';
-
-my $export_bday_vcf = 1;    # set to 1 if you want an exported copy
+my $fileIn                  = 'd:\Archiv\Kontakte\2022\ab-torben-nc-2022-04-10.vcf';
 
 # chdir to dir of perl file
 chdir dirname( __FILE__ );
@@ -60,7 +55,7 @@ my @cards = split m/BEGIN:VCARD/, join( '', @cont );
 undef @cont;
 @cards = grep {m/\nBDAY[;:]/} @cards;
 
-if ( $export_bday_vcf != 0 and $#cards > 0 ) {
+if ( $#cards > 0 ) {
   # export addressbook of only birthdays
   my ( $fname, $fdir, $fext ) = fileparse( $fileIn, qr/[.][^.]*/ );
   my $fileOut = "$fname-BdayOnly$fext";
