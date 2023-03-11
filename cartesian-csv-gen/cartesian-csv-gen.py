@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # by Dr. Torben Menke, 24.09.2019
 """
-Cartesian product of dynamic parameters.
+Cartesian product of multi-value lists.
 
 reads config.ini
-extracts dynamic parameters (list of values per parameter, separated by ',' )
+extracts dynamic parameters (=list of values per parameter, separated by ',' )
 generates cartesian product of all dynamic parameter combinations
 """
 import itertools
@@ -23,7 +23,7 @@ for k in config.options("dynamic"):
     l = [v.strip() for v in l]  # trim white spaces
     list_values.append(l)
 
-with open("out.csv", "w", newline="\n") as fh:
+with open("out.tsv", "w", newline="\n") as fh:
     fh.write("\t".join(list_keys))
     fh.write("\n")
 
