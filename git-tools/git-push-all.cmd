@@ -9,7 +9,6 @@ echo === %%D ====
 echo ===
 cd %%D
 git add .
-REM git commit -m "added more files"
 git commit -m "improvements"
 git push
 cd ..
