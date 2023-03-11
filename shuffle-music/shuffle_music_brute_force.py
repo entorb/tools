@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+"""
+How long should I listen to music...
+
+in random order to have heard most of the songs?
+"""
 import itertools as it
 import math
 import time
@@ -14,9 +20,11 @@ total_songs = 6
 num_songs_played = 10
 
 num_playorder_combinations = int(math.pow(total_songs, num_songs_played))
-print(f"{total_songs} total songs and {num_songs_played} songs played give {num_playorder_combinations} combinations")
+print(
+    f"{total_songs} total songs and {num_songs_played} songs played give {num_playorder_combinations} combinations",
+)
 
-total_songs_80pct = round(total_songs*0.8, 0)
+total_songs_80pct = round(total_songs * 0.8, 0)
 cnt_all_played = 0
 cnt_80pct_played = 0
 
@@ -24,18 +32,26 @@ timestart = time.time()
 for playorder in it.product(range(total_songs), repeat=num_songs_played):
     if shuffle_music_lib.check_all_played(total_songs=total_songs, playorder=playorder):
         cnt_all_played += 1
-    if shuffle_music_lib.check_cnt_unique_played(playorder=playorder) >= total_songs_80pct:
+    if (
+        shuffle_music_lib.check_cnt_unique_played(playorder=playorder)
+        >= total_songs_80pct
+    ):
         cnt_80pct_played += 1
         # print(tup)
 duration = time.time() - timestart
-print("%.1f min" % (duration/60))
-print("%.1f mill combinations per sec" %
-      (num_playorder_combinations/duration / 10 ** 6))
+print("%.1f min" % (duration / 60))
+print(
+    "%.1f mill combinations per sec"
+    % (num_playorder_combinations / duration / 10**6),
+)
 
-print(f"For {total_songs} songs and {num_songs_played} steps\nthe probability to have all played is %.1f%%\nthe probability to have 80%% played is %.1f%%" %
-      (100.0 * cnt_all_played / num_playorder_combinations,
-       100.0 * cnt_80pct_played / num_playorder_combinations)
-      )
+print(
+    f"For {total_songs} songs and {num_songs_played} steps\nthe probability to have all played is %.1f%%\nthe probability to have 80%% played is %.1f%%"
+    % (
+        100.0 * cnt_all_played / num_playorder_combinations,
+        100.0 * cnt_80pct_played / num_playorder_combinations,
+    ),
+)
 
 # # step 1: manually initialize
 # all_playorders = []
