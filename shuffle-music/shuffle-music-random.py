@@ -78,7 +78,7 @@ def loop_over_rand_playorders(total_songs: int, num_songs_played: int, num_test_
 
 
 if __name__ == '__main__':
-    total_songs = 20
+    total_songs = 100
     num_test_loops = 1000
     time_start = time.time()
 
