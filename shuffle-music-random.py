@@ -1,5 +1,14 @@
 import random
 
+# Question
+# If a listen to music in shuffle mode, how long do I need to listen until I most probable have heard all / 80% of the songs
+
+# Approach here
+# many loops of random playorder
+
+# TODO
+# use pandas and matplotlib zu draw charts
+
 
 def check_all_played(amount_of_songs: int, playorder: list) -> bool:
     """ 
