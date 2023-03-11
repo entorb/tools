@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Question
-# If a listen to music in shuffle mode, how long do I need to listen until I most probable have heard all / 80% of the songs
+# Listening to music in shuffle mode, how long do I need to listen until I most probable have heard all / 80% of the songs
 
 # Approach here
 # many loops of random playorder
