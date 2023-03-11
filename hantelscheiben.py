@@ -61,13 +61,13 @@ for target in targets:
         #       (match_higher[0], match_higher[0]-target)
         #       + f" via {match_higher[1]}")
         deltaHigh = match_higher[0]-target
-    if deltaLow < deltaHigh:
-        print("%.1f -> %.1f" %
-              (target, match_lower[0])
+#    if deltaLow < deltaHigh:
+    print("%.1f -> %.1f" %
+            (target, match_lower[0])
               + f" via {match_lower[1]}")
-        deltaLow = target - match_lower[0]
-    else:
-        print("%.1f -> %.1f" %
+    deltaLow = target - match_lower[0]
+#    else:
+    print("%.1f -> %.1f" %
               (target, match_higher[0])
               + f" via {match_higher[1]}")
-        deltaHigh = match_higher[0]-target
+    deltaHigh = match_higher[0]-target
