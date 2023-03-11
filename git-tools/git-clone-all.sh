@@ -1,4 +1,4 @@
-cd ..
+cd ../..
 # git clone https://github.com/entorb/arduino-sensorics
 # git clone https://github.com/entorb/COVID-19-Coronavirus-German-Regions
 # git clone https://github.com/entorb/dissertation

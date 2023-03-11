@@ -2,7 +2,7 @@
 
 REM first open and unlock the SSH Key for the computer via Putty Pageant
 
-cd..
+cd..\..
 
 FOR %%D in (arduino-sensorics, COVID-19-Coronavirus-German-Regions, dissertation, HackerRank, private, raspi-sensorics, rememberthemilk, sql2csv, tools, tools-backup-scripts, tools-photos, twitter-gov-accounts) DO (
 
@@ -13,3 +13,4 @@ git clone https://github.com/entorb/%%D
 )
 
 pause
+
