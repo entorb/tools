@@ -11,7 +11,13 @@ import matplotlib.pyplot as plt
 # Approach here
 # many loops of random playorder
 
+# Mathematical solution might be found here
+# https://en.m.wikipedia.org/wiki/Negative_binomial_distribution
+
 # TODO
+# generated random data -> file and re-generate only when not existing to speepup the plotting
+
+# DONE
 # use multiprocessing to speed up
 # use pandas and matplotlib zu draw charts
 
