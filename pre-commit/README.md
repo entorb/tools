@@ -15,7 +15,9 @@ or
 ## run automatically via github actions
 copy dir `.github/workflows/` to your repo, to automatically run upon push of commits and creation of pull requests.
 
+## configure
+* `.pre-commit-config.yaml` define which hooks to run
+* `setup.cfg` sets flake8 parameters to use
+
 ## update pre-commit hooks to latest version
-run
-`pre-commit autoupdate`
-to update versions in `.pre-commit-config.yaml`
+run `pre-commit autoupdate` to update hook versions in `.pre-commit-config.yaml`
