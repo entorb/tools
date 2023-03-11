@@ -23,6 +23,6 @@ if __name__ == "__main__":
     # start processes on pile of work
     l_results_unsorted = pool.starmap(
         func=worker,
-        iterable=l_pile_of_work,  # each item is a list of 2 parrameters
+        iterable=l_pile_of_work,  # each item is a list of 2 parameters
     )
     l_results = sorted(l_results_unsorted)  # sort by i
