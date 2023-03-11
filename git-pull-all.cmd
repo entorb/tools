@@ -1,10 +1,8 @@
 @echo off
 
-D:
-cd D:\GitHub
+cd ..
 
 FOR /D %%D in ("*") DO (
-
 echo ===
 echo === %%D ====
 echo ===
