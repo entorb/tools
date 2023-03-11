@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Convert UTF8 to ANSI.
+Convert UTF-8 to ANSI.
 """
 import glob
 import os
