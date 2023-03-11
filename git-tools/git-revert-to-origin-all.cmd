@@ -5,8 +5,9 @@ echo ===
 echo === %%D ====
 echo ===
 cd %%D
-git reflog expire --expire=now --all
-git gc --prune=now --aggressive
+git fetch origin
+git reset --hard origin/main
+git pull 
 cd ..
 )
 
