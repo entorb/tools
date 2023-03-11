@@ -57,7 +57,7 @@ for sheet_name in lSheetsToReadout:
     colOut += 1
     cellOut = sheetOut.cell(row=rowOut, column=colOut)
     cellOut.value = "sheet"
-    for (_cell_location, cell_title) in dCellsToReadoutPerSheet[sheet_name]:
+    for _cell_location, cell_title in dCellsToReadoutPerSheet[sheet_name]:
         colOut += 1
         cellOut = sheetOut.cell(row=rowOut, column=colOut)
         cellOut.value = cell_title
@@ -81,7 +81,7 @@ for filepath in glob.glob(dir_input + "/" + "*.xls*"):
         colOut += 1
         cellOut = sheetOut.cell(row=rowOut, column=colOut)
         cellOut.value = sheet_name
-        for (cell_location, _cell_title) in dCellsToReadoutPerSheet[sheet_name]:
+        for cell_location, _cell_title in dCellsToReadoutPerSheet[sheet_name]:
             colOut += 1
             sheetIn = workbook[sheet_name]
             cellIn = sheetIn[cell_location]
