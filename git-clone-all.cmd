@@ -2,8 +2,7 @@
 
 REM first open and unlock the SSH Key for the computer via Putty Pageant
 
-D:
-cd D:\GitHub
+cd..
 
 FOR %%D in (arduino-sensorics, COVID-19-Coronavirus-German-Regions, dissertation, HackerRank, private, raspi-sensorics, rememberthemilk, sql2csv, tools, tools-backup-scripts, tools-photos, twitter-gov-accounts) DO (
 
