@@ -2,6 +2,9 @@ import random
 import time
 import multiprocessing
 
+import pandas as pd
+import matplotlib.pyplot as plt
+
 # Question
 # If a listen to music in shuffle mode, how long do I need to listen until I most probable have heard all / 80% of the songs
 
@@ -71,11 +74,11 @@ def loop_over_rand_playorders(total_songs: int, num_songs_played: int, num_test_
 if __name__ == '__main__':
     #    freeze_support()
 
-    total_songs = 100
+    total_songs = 20
     num_test_loops = 1000
     time_start = time.time()
 
-    # # single processing
+    # single processing
     # results = []
     # for num_songs_played in range(total_songs, 4*total_songs+1):
     #     result = loop_over_rand_playorders(
@@ -87,17 +90,17 @@ if __name__ == '__main__':
 
     # multi processing
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count()-1)
-    L1 = []
-    for num_songs_played in range(total_songs, 4*total_songs+1):
+    l_pile_of_work = []
+    for num_songs_played in range(int(total_songs*0.8), int(4*total_songs+1)):
         L2 = (total_songs, num_songs_played, num_test_loops)
-        L1.append(L2)
-    results = pool.starmap(loop_over_rand_playorders, L1)
-    del L1, L2
+        l_pile_of_work.append(L2)
+    results = pool.starmap(loop_over_rand_playorders, l_pile_of_work)
+    del l_pile_of_work, L2
 
     duration = time.time() - time_start
     print("%.1f min" % (duration/60))
     # Laptop, 4 cores:
-    # Single: 2.0 min
+    # Single: 1.9 min
     # Multi: 1.1 min with 4 processes
     # Multi: 1.1 min with 3 processes
     # Multi: 4.6 min in debug mode with 4 processes
@@ -107,3 +110,20 @@ if __name__ == '__main__':
         # print(f"For {total_songs} songs and {num_songs_played} steps\nthe probability to have all played is %.1f%%\nthe probability to have 80%% played is %.1f%%" %
         #       (pct_all_played, pct_80pct_played)
         #       )
+
+    df = pd.DataFrame(
+        data=results,
+        columns=(
+            'num_songs_played', 'pct_all_played', 'pct_80pct_played')
+    )
+    df.set_index(['num_songs_played'], inplace=True)
+    # print(df.head())
+    myPlot = df.plot(legend=True, linewidth=2.0, zorder=1, figsize=(8, 6))
+    myPlot.set_ylim(0, 100)
+    plt.title(f'Shuffling {total_songs} Songs')
+    plt.xlabel(f"Songs Played")
+    plt.ylabel(f"Probability (%)")
+    plt.grid(zorder=-1)
+    plt.tight_layout()
+    plt.savefig(fname=f'shuffle-music-random-%03d.png' %
+                total_songs, format='png')
