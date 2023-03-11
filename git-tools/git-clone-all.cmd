@@ -4,6 +4,7 @@ git clone https://github.com/entorb/arduino-sensorics
 git clone https://github.com/entorb/COVID-19-Coronavirus-German-Regions
 git clone https://github.com/entorb/dissertation
 git clone https://github.com/entorb/HackerRank
+git clone https://github.com/entorb/hpmor-ebook
 git clone https://github.com/entorb/private
 git clone https://github.com/entorb/raspi-sensorics
 git clone https://github.com/entorb/rememberthemilk
