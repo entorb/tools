@@ -2,8 +2,6 @@
 #  pip3 install pre-commit
 # run:
 #  pre-commit run -a
-# or
-#  pre-commit run --files myFile1.py myFile2.py
 # update deps:
 #  pre-commit autoupdate
 

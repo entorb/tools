@@ -7,7 +7,7 @@ echo ===
 cd %%D
 git fetch origin
 git reset --hard origin/main
-git pull 
+git pull
 cd ..
 )
 

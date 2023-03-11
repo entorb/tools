@@ -3,7 +3,7 @@ REM from https://medium.com/@checko/merging-two-git-repositories-into-one-preser
 mkdir merged_repo
 REM 1. init new repo
 cd merged_repo
-git init 
+git init
 touch test.txt
 git add .
 git commit -m "Initialize new repo"
@@ -18,7 +18,7 @@ git merge --allow-unrelated-histories repo1/master
 REM 3. Create a sub directory and move all repo1 files to it.
 mkdir repo1_backup
 echo "manually move * -> repo1_backup/
-pause 
+pause
 REM Linux: mv * repo1_backup/
 REM Win: manually
 git add .
@@ -31,11 +31,11 @@ git merge --allow-unrelated-histories repo2/master
 REM 5. Fix any merge conflicts and complete the merge as follows
 REM git merge --continue
 
-pause	
+pause
 git status
 pause
 
-echo manually delete dir repo1_backup 
+echo manually delete dir repo1_backup
 pause
 git add .
 git commit -m "remove repo1_backup"
