@@ -1,7 +1,5 @@
 @echo off
 
-cd ..
-
 FOR /D %%D in ("*") DO (
 echo ===
 echo === %%D ====

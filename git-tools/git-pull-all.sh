@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ..
+
 for D in `ls -d */`
 do
     echo ===
