@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # by Dr. Torben Menke, 24.09.2019
 """
-Cartesian product of multi-value lists.
+Cartesian product of multiple lists.
 
-reads config.ini
-extracts dynamic parameters (=list of values per parameter, separated by ',' )
-generates cartesian product of all dynamic parameter combinations
+* reads several lists from `cartesian-csv-gen.ini`
+* generates Cartesian product of all combinations
+
+see README.md for example
 """
+
 import itertools
 from configparser import ConfigParser
 
