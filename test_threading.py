@@ -8,7 +8,7 @@ import threading
 import time
 
 
-def worker(q_work: queue.Queue, results: dict):
+def worker(q_work: queue.Queue, results: dict) -> None:
     while not q_work.empty():
         i, s = q_work.get()
         time.sleep(0.1)
@@ -20,9 +20,9 @@ def worker(q_work: queue.Queue, results: dict):
 if __name__ == "__main__":
     d_results = {}  # threads can write into dict
     # gen. pile of work
-    l_pile_of_work = []
+    l_pile_of_work: list[tuple[int, str]] = []
     for i in range(1_000):
-        tup = (i, "n" + str(i))
+        tup: tuple[int, str] = (i, "n" + str(i))
         l_pile_of_work.append(tup)
     # convert list of work to queue
     q_pile_of_work = queue.Queue(
