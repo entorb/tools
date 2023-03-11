@@ -1,5 +1,5 @@
 @echo off
-echo Commit all your pending changes
+echo manually commit all your pending changes
 pause
 REM Remove everything from the git index in order to refresh your git repository:
 git rm -r --cached .

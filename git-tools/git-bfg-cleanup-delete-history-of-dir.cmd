@@ -1,7 +1,7 @@
 @echo off
 
 set myRepoBaseURL=https://github.com/entorb/
-set myRepoName=COVID-19-Coronavirus-German-Regions.git
+set myRepoName=COVID-19-Coronavirus-German-Regions
 set myDirToDelete=data
 
 REM 1. run create new mirror of remote repo
