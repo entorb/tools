@@ -13,15 +13,15 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read("cartesian-csv-gen.ini")
 
-listOfKeys = []
-listsOfValues = []
+listOfKeys: list[str] = []
+listsOfValues: list[str] = []
 
 for k in config.options("dynamic"):
     s = config.get("dynamic", k)
     listOfKeys.append(k)
     l = s.split(",")
     l = [v.strip() for v in l]  # trim white spaces
-    listsOfValues.append(l)
+    listsOfValues.extend(l)
 
 with open("out.csv", "w", newline="\n") as fh:
     fh.write("\t".join(listOfKeys))
