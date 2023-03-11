@@ -1,8 +1,8 @@
 @echo off
 
-REM FOR /D %%D in ("*") DO (
+FOR /D %%D in ("*") DO (
 REM FOR /D %%D in (private, tools, tools-backup-scripts, tools-photos) DO (
-FOR /D %%D in (tools) DO (
+REM FOR /D %%D in (tools) DO (
 
 echo ===
 echo === %%D ====
