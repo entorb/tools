@@ -1,3 +1,10 @@
+"""
+'synchronizes' source and target photo directories while resizing file in target dir to 1920px
+
+location online: https://github.com/entorb/tools/tree/master/Photo-Tools
+location local:  f:\FotoalbumSSD\Skripte
+"""
+
 # config is in PhotoSyncShrink.ini
 
 # DONE
@@ -5,12 +12,13 @@
 # 1.1 dirs that are not in dirSource
 # 1.2 files that are not in dirSource
 # 1.3 applying blacklist of not wanted files / dirs
-
-# TODO
 # 2. copy from dirTarget
 # 2.1 copy all
 # 2.2 copy using backlist
 # 2.3 shrinking pictures
+
+# TODO
+# target: remove blacklisted files
 
 # Bugs
 
@@ -51,7 +59,7 @@ l_subprocesses = []  # list of subprocesses
 def read_config():
     config = ConfigParser(interpolation=None)
     # interpolation=None -> treats % in values as char % instead of interpreting it
-    config.read('PhotoSyncShrink.ini', encoding='utf-8')
+    config.read('Photo-SyncShrink.ini', encoding='utf-8')
 
     o['dirSource'] = config.get('general', 'dirSource').replace('\\', '/')
     o['dirTarget'] = config.get('general', 'dirTarget').replace('\\', '/')
