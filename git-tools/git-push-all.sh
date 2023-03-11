@@ -1,7 +1,6 @@
 #!/bin/bash
 
-for D in `ls -d */`
-do
+for D in $(ls -d */); do
     echo ===
     echo === $D ====
     echo ===

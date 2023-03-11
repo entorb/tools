@@ -5,6 +5,7 @@ for D in $(ls -d */); do
     echo === $D ====
     echo ===
     cd $D
-    git pull
+    git reflog expire --expire=now --all
+    git gc --prune=now --aggressive
     cd ..
 done
