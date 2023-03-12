@@ -4,10 +4,9 @@ Playground for the vobject module.
 """
 
 import codecs
+from pprint import pprint
 
 import vobject  # pip install vobject
-
-from pprint import pprint
 
 fileIn = "ab-torben-nc-2023-02-05.vcf"
 obj = vobject.readComponents(codecs.open(fileIn, encoding="utf-8").read())  # type: ignore
