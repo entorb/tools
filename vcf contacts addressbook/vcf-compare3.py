@@ -2,7 +2,8 @@
 """
 Convert vcf to sorted list of cleaned cards.
 
-converts vcf to a list, sorted by Full Name FN field, to allow for comparison of 2 backups of the same address book
+converts vcf to a list, sorted by Full Name FN field,
+to allow for comparison of 2 backups of the same address book
 """
 import codecs
 import os.path

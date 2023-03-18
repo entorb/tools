@@ -21,9 +21,9 @@ list_values: list[list[str]] = []
 for k in config.options("dynamic"):
     s = config.get("dynamic", k)
     list_keys.append(k)
-    l = s.split(",")
-    l = [v.strip() for v in l]  # trim white spaces
-    list_values.append(l)
+    values = s.split(",")
+    values = [v.strip() for v in values]  # trim white spaces
+    list_values.append(values)
 
 with open("out.tsv", "w", newline="\n") as fh:
     fh.write("\t".join(list_keys))

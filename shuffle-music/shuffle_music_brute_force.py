@@ -21,7 +21,8 @@ num_songs_played = 10
 
 num_playorder_combinations = int(math.pow(total_songs, num_songs_played))
 print(
-    f"{total_songs} total songs and {num_songs_played} songs played give {num_playorder_combinations} combinations",
+    f"{total_songs} total songs and {num_songs_played} songs played give "
+    + f"{num_playorder_combinations} combinations",
 )
 
 total_songs_80pct = round(total_songs * 0.8, 0)
@@ -46,7 +47,11 @@ print(
 )
 
 print(
-    f"For {total_songs} songs and {num_songs_played} steps\nthe probability to have all played is %.1f%%\nthe probability to have 80%% played is %.1f%%"
+    (
+        f"For {total_songs} songs and {num_songs_played} steps\n"
+        + "the probability to have all played is %.1f%%\n"
+        + "the probability to have 80%% played is %.1f%%"
+    )
     % (
         100.0 * cnt_all_played / num_playorder_combinations,
         100.0 * cnt_80pct_played / num_playorder_combinations,

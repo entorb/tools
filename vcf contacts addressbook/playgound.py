@@ -9,7 +9,9 @@ from pprint import pprint
 import vobject  # pip install vobject
 
 fileIn = "ab-torben-nc-2023-02-05.vcf"
-obj = vobject.readComponents(codecs.open(fileIn, encoding="utf-8").read())  # type: ignore
+obj = vobject.readComponents(  # type: ignore
+    codecs.open(fileIn, encoding="utf-8").read(),
+)
 contacts: list[vobject.base.Component] = list(obj)  # type: ignore
 
 card = contacts[0]
