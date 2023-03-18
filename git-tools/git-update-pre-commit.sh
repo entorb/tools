@@ -3,13 +3,13 @@
 FILE=".pre-commit-config.yaml"
 
 for D in $(ls -d */); do
-    if [ $D == 'hpmor-en/' ]; then
+    echo "=== $D ==="
+    if [[ "$D" =~ ^(hpmor-en/|DukeTypem2D/)$ ]]; then
         echo skipping $D
         continue
     fi
     cd $D
     if [ -f $FILE ]; then
-        echo "=== $D ==="
         # check for modifications
         if ! [ -z "$(git status --porcelain)" ]; then
             echo 'commit and push first'
@@ -23,6 +23,7 @@ for D in $(ls -d */); do
                 echo 'pre-commit failed'
                 exit 1
             }
+            git status
             read -p "Press [Enter] to commit changes"
             git add .
             git commit -m "pre-commit update"
