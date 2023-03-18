@@ -19,7 +19,8 @@ import pandas as pd
 import shuffle_music_lib
 
 # TODO
-# generated random data -> file and re-generate only when not existing to speepup the plotting
+# generated random data -> file and re-generate only when
+#  not existing to speepup the plotting
 
 # DONE
 # use multiprocessing to speed up
@@ -93,7 +94,8 @@ def plot_results(
     axes.yaxis.set_major_formatter(mtick.PercentFormatter())
     plt.legend(["prob. 80% played", "prob. all played"])
     plt.title(
-        f"Shuffling {total_songs} Songs\n(simulation of {num_test_loops} randomized loops)",
+        f"Shuffling {total_songs} Songs\n"
+        + f"(simulation of {num_test_loops} randomized loops)",
     )
     plt.xlabel("Songs Played", fontsize=12)
     plt.ylabel("\nProbability", fontsize=12, labelpad=-5)
@@ -162,6 +164,8 @@ if __name__ == "__main__":
 
     # for result in results:
     #     num_songs_played, pct_all_played, pct_80pct_played = result
-    # print(f"For {total_songs} songs and {num_songs_played} steps\nthe probability to have all played is %.1f%%\nthe probability to have 80%% played is %.1f%%" %
+    # print(f"For {total_songs} songs and {num_songs_played} steps\n
+    # the probability to have all played is %.1f%%\n
+    # the probability to have 80%% played is %.1f%%" %
     #       (pct_all_played, pct_80pct_played)
     #       )
