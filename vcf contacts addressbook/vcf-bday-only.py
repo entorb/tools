@@ -14,7 +14,9 @@ import vobject  # pip install vobject
 file_in = "ab-torben-nc-2023-02-05.vcf"
 file_out = "out.vcf"
 
-obj = vobject.readComponents(codecs.open(file_in, encoding="utf-8").read())  # type: ignore
+obj = vobject.readComponents(  # type: ignore
+    codecs.open(file_in, encoding="utf-8").read(),
+)
 contacts: list[vobject.base.Component] = list(obj)  # type: ignore
 
 contacts_filtered: list[vobject.base.Component] = []
