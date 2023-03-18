@@ -27,12 +27,13 @@ config = ConfigParser()
 config.read("excel_readout.ini", encoding="utf-8")
 
 # read the config and store the location of the cells to extract into a list
-# list containing the cells to extract as tuple: (section, key,value) e.g. ("Sheet1", "A3", "NameForA3")
+# list containing the cells to extract as tuple: (section, key,value) e.g.
+# ("Sheet1", "A3", "NameForA3")
 lSheetsToReadout: list[str] = []
 # dict that holds a list of tuples of (cell_location, cell_title)
 dCellsToReadoutPerSheet = {}
 
-l = config.sections()
+list_of_sections = config.sections()
 
 for sheet in config.sections():
     lSheetsToReadout.append(sheet)  # = sheet name
