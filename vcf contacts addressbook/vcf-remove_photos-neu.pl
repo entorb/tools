@@ -19,7 +19,7 @@ $cont =~ s/\r\n/\n/g;    # Windows Linebreak -> Linux Linebreak
 
 # Fields to remove
 my @L = qw (
-  PHOTO
+    PHOTO
 );
 
 # ADR
@@ -51,7 +51,8 @@ my @L = qw (
 # X-ICQ
 
 foreach my $cat (@L) {
-	$cont =~ s/(?<=\n)$cat[;:].*?\n(?=\w)//sg;    # alles bis zum ersten Zeilenumbuch ohne Leerzeichen, sondern mit Wortzeichen dahinter
+  $cont =~ s/(?<=\n)$cat[;:].*?\n(?=\w)//sg
+      ; # alles bis zum ersten Zeilenumbuch ohne Leerzeichen, sondern mit Wortzeichen dahinter
 }
 
 # $cont =~ s/;PREF=1//g;
@@ -59,14 +60,14 @@ foreach my $cat (@L) {
 
 my %h;
 while ( $cont =~ m/(?<=\n)(\w[^:]+)[:]/gc ) {
-	$h{$1}++;
+  $h{$1}++;
 }
 
 # by values, reverse
 foreach my $k ( sort { $h{$b} <=> $h{$a} } keys(%h) ) {
-	print "$h{$k}\t$k\n";
+  print "$h{$k}\t$k\n";
 
-	#last if $h{$k}==1;
+  #last if $h{$k}==1;
 }
 
 open( my $fhout, ">", $fileOut ) or die $!;
