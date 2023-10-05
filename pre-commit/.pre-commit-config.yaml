@@ -3,7 +3,7 @@
 # register as git commit-hook to run automatically
 #  pre-commit install
 # run manually
-#  pre-commit run -a
+#  pre-commit run --all-files
 # or
 #  pre-commit run --files myFile1.py myFile2.py
 # update hooks to latest version
@@ -39,8 +39,7 @@ repos:
       - id: detect-private-key
       # conflict with black below
       # - id: double-quote-string-fixer
-      # not: since it conflicts with python gen. json files
-      # - id: end-of-file-fixer
+      - id: end-of-file-fixer
       - id: file-contents-sorter
       - id: fix-byte-order-marker
       - id: fix-encoding-pragma
