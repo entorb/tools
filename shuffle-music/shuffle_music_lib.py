@@ -3,6 +3,9 @@
 Shared methods.
 """
 
+# TODO:
+# ruff: noqa
+
 
 def check_all_played(total_songs: int, playorder: tuple[int]) -> bool:
     """

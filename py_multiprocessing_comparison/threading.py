@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
+
+# TODO:
+# ruff: noqa
+
 """
 Trying out threading.
 """
+
 import os
 import queue
 import threading

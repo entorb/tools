@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+# TODO:
+# ruff: noqa
+
 """
 Question: Listening to music in shuffle mode...
 
@@ -10,6 +14,7 @@ many loops of random playorder
 Mathematical solution might be found here
 https://en.m.wikipedia.org/wiki/Negative_binomial_distribution
 """
+
 import multiprocessing
 import random
 import time
