@@ -4,6 +4,7 @@ How long should I listen to music...
 
 in random order to have heard most of the songs?
 """
+
 import itertools as it
 import math
 import time
@@ -12,6 +13,9 @@ import shuffle_music_lib
 
 # FINDING:
 # 10^20 = 1.0e+20 combinations -> no brute force solution possible
+
+# TODO:
+# ruff: noqa
 
 # TODO use multiprocessing to speed up
 
@@ -42,8 +46,7 @@ for playorder in it.product(range(total_songs), repeat=num_songs_played):
 duration = time.time() - timestart
 print("%.1f min" % (duration / 60))
 print(
-    "%.1f mill combinations per sec"
-    % (num_playorder_combinations / duration / 10**6),
+    "%.1f mill combinations per sec" % (num_playorder_combinations / duration / 10**6),
 )
 
 print(

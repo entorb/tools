@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
+
+# TODO:
+# ruff: noqa
+
 """
 Trying out multiprocessing.
 """
+
 import multiprocessing
 import os
 
 
 def worker(i: int, s: str) -> tuple[int, str, int]:
+    """Worker function."""
     result = (i, s, os.getpid())
     return result
 
