@@ -25,7 +25,7 @@ for k in config.options("dynamic"):
     values = [v.strip() for v in values]  # trim white spaces
     list_values.append(values)
 
-with open("out.tsv", "w", newline="\n") as fh:
+with open("out.tsv", "w", newline="\n") as fh:  # noqa: PTH123
     fh.write("\t".join(list_keys))
     fh.write("\n")
 
