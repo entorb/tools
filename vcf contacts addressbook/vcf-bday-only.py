@@ -6,6 +6,9 @@ Containing only cards having a bday
 fields: BDAY FN N
 """
 
+# TODO:
+# ruff: noqa
+
 import codecs
 import re
 

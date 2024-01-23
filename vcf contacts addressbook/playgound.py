@@ -3,6 +3,9 @@
 Playground for the vobject module.
 """
 
+# TODO:
+# ruff: noqa
+
 import codecs
 from pprint import pprint
 
@@ -20,4 +23,3 @@ pprint(card.contents["fn"])
 pprint(card.contents["n"][0])
 pprint(type(n[0]))
 pprint(len(n))
-pass
