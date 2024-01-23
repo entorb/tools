@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+# TODO:
+# ruff: noqa
+
 """
 Read many Excels and write into single report Excel.
 
