@@ -9,11 +9,13 @@ generate html report or all commits and week aggregate
 # allow assert
 # ruff: noqa: S101
 
+
 import datetime as dt
 import os
 import re
 import subprocess
 from pathlib import Path
+from typing import Literal
 
 # from pprint import pprint
 import pandas as pd
@@ -145,8 +147,26 @@ def convert_data_to_df(data: list[dict]) -> pd.DataFrame:
     df = pd.DataFrame.from_records(data)
     df["insert"] = df["insert"].fillna(0).astype(int)
     df["del"] = df["del"].fillna(0).astype(int)
-    # print(df)
+
+    # add column of time
+    df["time"] = df["date"].dt.time
+    df["hour"] = df["date"].dt.hour
+
+    # add column of shift 6:00, 14:00, 22:00
+    df["shift"] = df["date"].dt.hour.apply(_get_shift)
+
+    df["days_ago"] = (dt.datetime.today() - df["date"]).dt.days  # type: ignore  # noqa: DTZ002
     return df
+
+
+# Calculate the shifts based on the hour
+def _get_shift(hour: int) -> Literal["morning", "afternoon", "night"]:
+    if 6 <= hour < 14:  # noqa: PLR2004
+        return "morning"
+    elif 14 <= hour < 22:  # noqa: PLR2004, RET505
+        return "afternoon"
+    else:
+        return "night"
 
 
 if __name__ == "__main__":
@@ -160,7 +180,7 @@ if __name__ == "__main__":
     if (p / ".git").is_dir():
         os.chdir("..")
 
-    # loop over all dirs
+    # loop over all dirs, add the git repos to list
     p = Path()
     list_of_repos = sorted(
         [x for x in p.iterdir() if x.is_dir() and (x / ".git").is_dir()]
@@ -177,12 +197,15 @@ if __name__ == "__main__":
         assert len(data) > 0, f"no git commit data in {d}"
         # pprint(data[-1])
         df = convert_data_to_df(data)
+        # add column of dir name
         df["repo"] = d.name
+        # append to df_all
         df_all = pd.concat([df_all, df], ignore_index=True)
         os.chdir("..")
         # break
 
     df_all = df_all.sort_values(by=["date"], ascending=False)
+    # html export
     df_all[
         [
             "date",
@@ -197,13 +220,26 @@ if __name__ == "__main__":
         ]
     ].to_html("git-log-report-all.html", index=False, justify="center")
 
-    df_week = df_all.groupby(["week", "repo"]).agg(
+    # filter on date <= 30 days from today
+    df_all["date"]
+
+    # week report
+    df = df_all.groupby(["week", "repo"]).agg(
         commits=("date", "count"),
         files=("files", "sum"),
         inserts=("insert", "sum"),
         dels=("del", "sum"),
     )
     # sort by index week desc and repos asc
-    df_week = df_week.sort_values(by=["week", "repo"], ascending=[False, True])
+    df = df.sort_values(by=["week", "repo"], ascending=[False, True])
+    # export
+    df.to_html("git-log-report-weekly.html", index=True, justify="center")
 
-    df_week.to_html("git-log-report-weekly.html", index=True, justify="center")
+    # filter on last 30 days
+    df30d = df_all.query("days_ago <= 30")
+    # group by hour
+    df = df30d.groupby(["hour"]).agg(commits=("date", "count"))
+    print(df)
+    # group by shift
+    df = df30d.groupby(["shift"]).agg(commits=("date", "count"))
+    print(df)
