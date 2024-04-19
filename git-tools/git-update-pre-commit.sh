@@ -4,7 +4,7 @@ FILE=".pre-commit-config.yaml"
 
 for D in $(ls -d */); do
     echo "=== $D ==="
-    if [[ "$D" =~ ^(hpmor-en/|DukeTypem2D/)$ ]]; then
+    if [[ "$D" =~ ^(pre-commit-config/|zzz_other/|hpmor-de/|private/|raspi-sensorics/|strava/|tools/|typonuketool/)$ ]]; then
         echo skipping $D
         continue
     fi
@@ -16,8 +16,8 @@ for D in $(ls -d */); do
             exit 1
         fi
         git pull
-        cp ../tools/pre-commit/$FILE ./$FILE
-        cp ../tools/pre-commit/.ruff.toml ./
+        cp ../pre-commit-config/$FILE ./$FILE
+        cp ../pre-commit-config/.ruff.toml ./
         # if changes, run pre-commit and commit afterwards
         if ! [ -z "$(git status --porcelain)" ]; then
             pre-commit run -a || {
