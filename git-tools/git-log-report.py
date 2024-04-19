@@ -9,7 +9,6 @@ generate html report or all commits and week aggregate
 # allow assert
 # ruff: noqa: S101
 
-
 import datetime as dt
 import os
 import re
