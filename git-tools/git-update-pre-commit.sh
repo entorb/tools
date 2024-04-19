@@ -17,6 +17,7 @@ for D in $(ls -d */); do
         fi
         git pull
         cp ../tools/pre-commit/$FILE ./$FILE
+        cp ../tools/pre-commit/.ruff.toml ./
         # if changes, run pre-commit and commit afterwards
         if ! [ -z "$(git status --porcelain)" ]; then
             pre-commit run -a || {
