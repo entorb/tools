@@ -4,7 +4,7 @@ FILE=".pre-commit-config.yaml"
 
 for D in $(ls -d */); do
     echo "=== $D ==="
-    if [[ "$D" =~ ^(pre-commit-config/|zzz_other/|hpmor-de/|private/|raspi-sensorics/|strava/|tools/|typonuketool/)$ ]]; then
+    if [[ "$D" =~ ^(pre-commit-config/|zzz_other/|hpmor-de/|private/|raspi-sensorics/|strava/|tools/|tools-photos/|typonuketool/)$ ]]; then
         echo skipping $D
         continue
     fi
