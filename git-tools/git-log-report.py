@@ -28,7 +28,7 @@ def run_git_log() -> str:
     """
     # git log --author="Torben" --date=iso-strict --pretty=format:'%cd<!!Split!!>%h<!!Split!!>%s<!!Split!!>%cn<!!Split!!>%an' --shortstat  # noqa: E501
     sp = subprocess.run(
-        [  # noqa: S603, S607
+        [  # noqa: S607
             "git",
             "log",
             "--author=Torben",
