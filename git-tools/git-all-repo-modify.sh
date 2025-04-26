@@ -2,19 +2,28 @@
 
 for D in $(ls -d */); do
     if [ $D == "zzz_other/" ]; then continue; fi
-    if [ $D == "template-python/" ]; then continue; fi
+    # if [ $D == "template-python/" ]; then continue; fi
+    # if [ $D == "hpmor-de/" ]; then continue; fi
 
-    if [ $D == "hpmor-de/" ]; then continue; fi
     echo ===
     echo === $D ====
     echo ===
-    cd $D
-    git pull
-    cp ../template-python/.gitattributes ./
-    git add .gitattributes
-    git commit -m "Update .gitattributes"
-    git push
-
+    if [ -f $D/ruff.toml ]; then
+        cd $D
+        # ruff check --fix
+        # ruff format
+        git add .pre-commit-config.yaml
+        pre-commit run --all-files
+        # git commit -m "Update .pre-commit-config.yaml"
+        # pre-commit autoupdate
+        # pre-commit run --all-files
+        # git add .github/workflows/*.yml
+        # git pull
+        # git commit -m "Use .python-version in GH Actions"
+        # git push
+        cd ..
+        # read -p "Press enter to continue"
+    fi
     # if [ ! -f LICENSE ]; then
     #     read -p "LICENSE missing, shall we add it? (y/n) " choice
     #     if [ "$choice" == "y" ]; then
@@ -47,5 +56,5 @@ for D in $(ls -d */); do
     #         # git push
     #     fi
     # fi
-    cd ..
+    # cd ..
 done
