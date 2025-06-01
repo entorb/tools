@@ -38,7 +38,7 @@ def run_git_log() -> str:
             # %s: commit subject
             # %cn: committer name
             # %an: author name
-            "--pretty=format:%cd<!!Split!!>%h<!!Split!!>%s<!!Split!!>%cn<!!Split!!>%an",
+            "--pretty=format:%ad<!!Split!!>%h<!!Split!!>%s<!!Split!!>%cn<!!Split!!>%an",
             "--shortstat",
         ],
         check=True,
