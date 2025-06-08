@@ -1,6 +1,6 @@
 # Cartesian product of multi-value lists
 
-* reads several lists from `cartesian-csv-gen.ini`
+* reads several lists from [cartesian-csv-gen.ini](cartesian-csv-gen.ini)
 * generates Cartesian product of all combinations
 
 ## Example
