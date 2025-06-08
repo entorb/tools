@@ -5,3 +5,5 @@ done/
 out/
 in/
 error/
+
+*.exe
