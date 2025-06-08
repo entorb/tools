@@ -1,11 +1,6 @@
-#!/usr/bin/env python3
-
-# TODO:
-# ruff: noqa
-
 """
 Trying out multiprocessing.
-"""
+"""  # noqa: INP001
 
 import multiprocessing
 import os

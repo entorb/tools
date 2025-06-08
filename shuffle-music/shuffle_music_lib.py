@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
 """
 Shared methods.
 """
 
-# TODO:
-# ruff: noqa
+# ruff: noqa: PLR2004 S101 INP001
 
 
 def check_all_played(total_songs: int, playorder: tuple[int]) -> bool:
