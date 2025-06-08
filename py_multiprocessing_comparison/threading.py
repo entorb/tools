@@ -1,11 +1,6 @@
-#!/usr/bin/env python3
-
-# TODO:
-# ruff: noqa
-
 """
 Trying out threading.
-"""
+"""  # noqa: INP001
 
 import os
 import queue
@@ -13,7 +8,7 @@ import threading
 import time
 
 
-def worker(
+def worker(  # noqa: D103
     q_work: queue.Queue[tuple[int, str]],
     results: dict[int, tuple[int, str, int]],
 ) -> None:
@@ -50,6 +45,6 @@ if __name__ == "__main__":
         )
         l_threads.append(t)
         t.start()
-    q_pile_of_work.join()  # wait for all threas to complete
+    q_pile_of_work.join()  # wait for all threads to complete
     l_results_unsorted = d_results.values()
     l_results = sorted(l_results_unsorted)  # sort by i
