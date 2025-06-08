@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-
-# TODO:
-# ruff: noqa
-
 """
 Question: Listening to music in shuffle mode...
 
@@ -15,15 +10,18 @@ Mathematical solution might be found here
 https://en.m.wikipedia.org/wiki/Negative_binomial_distribution
 """
 
+# ruff: noqa: D103 UP031 INP001
+
 import multiprocessing
 import random
 import time
 
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 import pandas as pd
 import shuffle_music_lib
 
-# TODO
+# TODOs:
 # generated random data -> file and re-generate only when
 #  not existing to speepup the plotting
 
@@ -32,17 +30,17 @@ import shuffle_music_lib
 # use pandas and matplotlib zu draw charts
 
 
-def gen_rand_playorder(total_songs: int, num_songs_played: int) -> tuple[int]:
+def gen_rand_play_order(total_songs: int, num_songs_played: int) -> tuple[int]:
     """
-    Generate a list of random playorder.
+    Generate a list of random play order.
     """
-    playorder: list[int] = []
+    l_play_order: list[int] = []
     for _step in range(num_songs_played):
-        playorder.append(random.randint(0, total_songs - 1))  # noqa: S311
-    return tuple(playorder)
+        l_play_order.append(random.randint(0, total_songs - 1))  # noqa: PERF401, S311
+    return tuple(l_play_order)
 
 
-def loop_over_rand_playorders(
+def loop_over_rand_play_orders(
     total_songs: int,
     num_songs_played: int,
     num_test_loops: int,
@@ -52,7 +50,7 @@ def loop_over_rand_playorders(
     cnt_80pct_played = 0
     # l_cnt_songs_played = []
     for _i in range(num_test_loops):
-        playorder = gen_rand_playorder(total_songs, num_songs_played)
+        playorder = gen_rand_play_order(total_songs, num_songs_played)
         cnt_unique_played = shuffle_music_lib.check_cnt_unique_played(
             playorder,
         )
@@ -85,7 +83,7 @@ def plot_results(
             "pct_80pct_played",
         ),
     )
-    df.set_index(["num_songs_played"], inplace=True)
+    df = df.set_index(["num_songs_played"])
     # print(df.head())
 
     fig, axes = plt.subplots(figsize=(8.00, 6.00))  # 10.80/2, 19.20/2
@@ -94,13 +92,11 @@ def plot_results(
     plt.grid(axis="both")
     axes.set_axisbelow(True)  # for grid below the lines
     axes.set_ylim(0, 100)
-    import matplotlib.ticker as mtick
 
     axes.yaxis.set_major_formatter(mtick.PercentFormatter())
     plt.legend(["prob. 80% played", "prob. all played"])
     plt.title(
-        f"Shuffling {total_songs} Songs\n"
-        + f"(simulation of {num_test_loops} randomized loops)",
+        f"Shuffling {total_songs} Songs\n(simulation of {num_test_loops} randomized loops)",  # noqa: E501
     )
     plt.xlabel("Songs Played", fontsize=12)
     plt.ylabel("\nProbability", fontsize=12, labelpad=-5)
@@ -117,7 +113,7 @@ def run_simulation_single_processing(
 ) -> tuple[tuple[int, float, float]]:
     results: list[tuple[int, float, float]] = []
     for num_songs_played in range(total_songs, 5 * total_songs + 1):
-        result = loop_over_rand_playorders(
+        result = loop_over_rand_play_orders(
             total_songs=total_songs,
             num_songs_played=num_songs_played,
             num_test_loops=num_test_loops,
@@ -130,10 +126,10 @@ def run_simulation_multi_processing(total_songs: int, num_test_loops: int) -> li
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
     l_pile_of_work = []
     for num_songs_played in range(int(total_songs * 0.8), int(5 * total_songs + 1)):
-        l_pile_of_work.append((total_songs, num_songs_played, num_test_loops))
+        l_pile_of_work.append((total_songs, num_songs_played, num_test_loops))  # noqa: PERF401
     # del num_songs_played
     results = pool.starmap(
-        func=loop_over_rand_playorders,
+        func=loop_over_rand_play_orders,
         iterable=l_pile_of_work,
     )
     return results
@@ -154,7 +150,7 @@ if __name__ == "__main__":
     )
 
     duration = time.time() - time_start
-    print("%d sec = %.1f min" % (duration, duration / 60))
+    print(f"{duration}sec")
     # Desktop 12 cores
     # for
     # total_songs = 100
