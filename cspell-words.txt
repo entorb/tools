@@ -1,8 +1,25 @@
 # CSpell Custom Dictionary Words
 autoflake
 autoupdate
+axisbelow
+dels
+figsize
+fontsize
+getpid
 isort
+labelpad
 Menke
+mtick
 noqa
+playorder
+playorders
 pyupgrade
+shortstat
+speepup
+timestart
 Torben
+xlabel
+yaxis
+ylabel
+ylim
+zorder
