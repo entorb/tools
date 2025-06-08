@@ -4,9 +4,12 @@ Analyze git commits.
 loop over all repositories
 run git log to get commit head data and change stats
 generate html report or all commits and week aggregate
+
+this is a bit deprecated, better see
+https://github.com/entorb/analyze-activities/blob/main/src/git_1_export_history.sh
+https://github.com/entorb/analyze-activities/blob/main/src/git_2_analyze.py
 """  # noqa: INP001
 
-# allow assert
 # ruff: noqa: S101
 
 import datetime as dt
@@ -14,7 +17,7 @@ import os
 import re
 import subprocess
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
 # from pprint import pprint
 import pandas as pd
@@ -27,7 +30,7 @@ def run_git_log() -> str:
     filter: author=Torben
     """
     # git log --author="Torben" --date=iso-strict --pretty=format:'%cd<!!Split!!>%h<!!Split!!>%s<!!Split!!>%cn<!!Split!!>%an' --shortstat  # noqa: E501
-    sp = subprocess.run(
+    sp = subprocess.run(  # noqa: S603
         [  # noqa: S607
             "git",
             "log",
@@ -53,16 +56,16 @@ def run_git_log() -> str:
     return res
 
 
-def extract_data_from_git_log(res: str) -> list[dict]:
+def extract_data_from_git_log(res: str) -> list[dict[str, Any]]:
     """Extract data from git log output."""
     if not res:
         msg = "git log response is empty"
         raise ValueError(msg)
 
-    list_of_dict = []
+    list_of_dict: list[dict[str, Any]] = []
 
     for element in res.split("\n\n"):  # split by empty line
-        stats_dict = {}
+        stats_dict: dict[str, Any] = {}
 
         # split item into header and stats by line break
         header, stats = element.split("\n ")
@@ -139,20 +142,20 @@ def test_extract_data_from_git_log() -> None:  # noqa: D103
 test_extract_data_from_git_log()
 
 
-def convert_data_to_df(data: list[dict]) -> pd.DataFrame:
+def convert_data_to_df(data: list[dict[str, Any]]) -> pd.DataFrame:
     """
     Convert git data from dict to DataFrame.
     """
-    df = pd.DataFrame.from_records(data)
-    df["insert"] = df["insert"].fillna(0).astype(int)
-    df["del"] = df["del"].fillna(0).astype(int)
+    df = pd.DataFrame.from_records(data)  # type: ignore
+    df["insert"] = df["insert"].fillna(0).astype(int)  # type: ignore
+    df["del"] = df["del"].fillna(0).astype(int)  # type: ignore
 
     # add column of time
     df["time"] = df["date"].dt.time
     df["hour"] = df["date"].dt.hour
 
     # add column of shift 6:00, 14:00, 22:00
-    df["shift"] = df["date"].dt.hour.apply(_get_shift)
+    df["shift"] = df["date"].dt.hour.apply(_get_shift)  # type: ignore
 
     df["days_ago"] = (dt.datetime.today() - df["date"]).dt.days  # type: ignore  # noqa: DTZ002
     return df
@@ -187,7 +190,6 @@ if __name__ == "__main__":
 
     df_all = pd.DataFrame()
 
-    # for d in (Path("hpmor-de"),):
     for d in list_of_repos:
         print(d)
         os.chdir(d)
@@ -203,7 +205,7 @@ if __name__ == "__main__":
         os.chdir("..")
         # break
 
-    df_all = df_all.sort_values(by=["date"], ascending=False)
+    df_all = df_all.sort_values(by=["date"], ascending=False)  # type: ignore
     # html export
     df_all[
         [
@@ -217,28 +219,28 @@ if __name__ == "__main__":
             "insert",
             "del",
         ]
-    ].to_html("git-log-report-all.html", index=False, justify="center")
+    ].to_html("git-log-report-all.html", index=False, justify="center")  # type: ignore
 
     # filter on date <= 30 days from today
     df_all["date"]
 
     # week report
-    df = df_all.groupby(["week", "repo"]).agg(
+    df = df_all.groupby(["week", "repo"]).agg(  # type: ignore
         commits=("date", "count"),
         files=("files", "sum"),
         inserts=("insert", "sum"),
         dels=("del", "sum"),
     )
     # sort by index week desc and repos asc
-    df = df.sort_values(by=["week", "repo"], ascending=[False, True])
+    df = df.sort_values(by=["week", "repo"], ascending=[False, True])  # type: ignore
     # export
-    df.to_html("git-log-report-weekly.html", index=True, justify="center")
+    df.to_html("git-log-report-weekly.html", index=True, justify="center")  # type: ignore
 
     # filter on last 30 days
     df30d = df_all.query("days_ago <= 30")
     # group by hour
-    df = df30d.groupby(["hour"]).agg(commits=("date", "count"))
+    df = df30d.groupby(["hour"]).agg(commits=("date", "count"))  # type: ignore
     print(df)
     # group by shift
-    df = df30d.groupby(["shift"]).agg(commits=("date", "count"))
+    df = df30d.groupby(["shift"]).agg(commits=("date", "count"))  # type: ignore
     print(df)

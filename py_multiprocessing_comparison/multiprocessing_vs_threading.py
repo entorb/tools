@@ -1,11 +1,6 @@
-#!/usr/bin/env python3
-
-# TODO:
-# ruff: noqa
-
 """
 Comparing multiprocessing and threading.
-"""
+"""  # noqa: INP001
 
 import math
 import multiprocessing
@@ -13,6 +8,7 @@ import os
 import queue
 import threading
 import time
+from typing import Any
 
 
 def worker_core(i: int, s: str) -> tuple[int, str, int]:
@@ -44,13 +40,13 @@ def worker_core_io(i: int, s: str) -> tuple[int, str, int]:
     return result
 
 
-def worker_multiprocessing_1(i: int, s: str) -> tuple[int, str, int]:
+def worker_multiprocessing_1(i: int, s: str) -> tuple[int, str, int]:  # noqa: D103
     return worker_core_cpu(i=i, s=s)
 
 
 def worker_multiprocessing_2(
-    q_work: multiprocessing.Queue,
-    q_results: multiprocessing.Queue,
+    q_work: multiprocessing.Queue,  # type: ignore
+    q_results: multiprocessing.Queue,  # type: ignore
 ) -> None:
     """
     Not faster than multiprocessing_1.
@@ -86,7 +82,7 @@ def multiprocessing_1(l_pile_of_work: list) -> list[tuple[int, str, int]]:
     return l_results
 
 
-def multiprocessing_2(l_pile_of_work: list):
+def multiprocessing_2(l_pile_of_work: list) -> list[Any]:
     """
     For CPU limited tasks.
 
@@ -132,7 +128,7 @@ def multiprocessing_2(l_pile_of_work: list):
     return l_results
 
 
-def threading_1(l_pile_of_work: list, num_threads: int):
+def threading_1(l_pile_of_work: list, num_threads: int) -> list[Any]:
     """
     For I/O limited tasks.
     """
@@ -153,20 +149,19 @@ def threading_1(l_pile_of_work: list, num_threads: int):
         )
         l_threads.append(t)
         t.start()
-    q_pile_of_work.join()  # wait for all threas to complete
+    q_pile_of_work.join()  # wait for all threads to complete
     l_results_unsorted = d_results.values()
     l_results = sorted(l_results_unsorted)  # sort by id
     return l_results
 
 
 if __name__ == "__main__":
-    l_pile_of_work = []
+    l_pile_of_work: list[tuple[int, str]] = []
     loops = 1_000
     for i in range(loops):
         # use index as first parameter
         L2 = (i, "n" + str(i))
         l_pile_of_work.append(L2)
-    del L2, i
     time_start = time.time()
     # results = multiprocessing_1(l_pile_of_work)
     # # or
@@ -174,7 +169,7 @@ if __name__ == "__main__":
     # # or
     results = threading_1(l_pile_of_work, num_threads=100)
     duration = time.time() - time_start
-    print("%d sec = %.1f min" % (duration, duration / 60))
+    print(f"{duration}sec")
 
     # for res in results:
     #     print('task %d, name %s was done in process %d' % (res))

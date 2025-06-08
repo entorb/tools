@@ -1,9 +1,8 @@
-#!/usr/bin/env python3
 """
 How long should I listen to music...
 
 in random order to have heard most of the songs?
-"""
+"""  # noqa: INP001
 
 import itertools as it
 import math
@@ -14,10 +13,7 @@ import shuffle_music_lib
 # FINDING:
 # 10^20 = 1.0e+20 combinations -> no brute force solution possible
 
-# TODO:
-# ruff: noqa
-
-# TODO use multiprocessing to speed up
+# TODO: use multiprocessing to speed up
 
 
 total_songs = 6
@@ -25,8 +21,7 @@ num_songs_played = 10
 
 num_playorder_combinations = int(math.pow(total_songs, num_songs_played))
 print(
-    f"{total_songs} total songs and {num_songs_played} songs played give "
-    + f"{num_playorder_combinations} combinations",
+    f"{total_songs} total songs and {num_songs_played} songs played give {num_playorder_combinations} combinations"  # noqa: E501
 )
 
 total_songs_80pct = round(total_songs * 0.8, 0)
@@ -51,7 +46,7 @@ print(
 
 print(
     (
-        f"For {total_songs} songs and {num_songs_played} steps\n"
+        f"For {total_songs} songs and {num_songs_played} steps\n"  # noqa: ISC003
         + "the probability to have all played is %.1f%%\n"
         + "the probability to have 80%% played is %.1f%%"
     )
