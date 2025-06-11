@@ -15,7 +15,7 @@
 # and
 # https://stackoverflow.com/questions/28417845/pushing-a-large-github-repo-fails-with-unable-to-push-to-unqualified-destinatio
 
-# for inital push
+# for initial push
 git log --pretty=oneline --reverse | head -1
 # 1a179e2db55c510aa4a682f89810199d47973b9b Initial commit
 
@@ -24,6 +24,7 @@ git log --pretty=oneline --reverse | head -1
 max=$(git log --oneline | wc -l)
 for i in $(seq $max -100 1); do
     echo $i
+    # cspell:disable-next-line
     g=$(git log --reverse --oneline --skip $i -n1 | perl -alne'print $F[0]')
     git push origin $g:refs/heads/master
 done
@@ -31,7 +32,7 @@ done
 #1 create
 git log --oneline >../commit-hist.txt
 
-# REM inital push (last line in commit-hist.txt)
+# REM initial push (last line in commit-hist.txt)
 # git push origin 1a179e2db5:refs/heads/master
 
 # REM now a push every 500 commits
