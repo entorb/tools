@@ -2,7 +2,7 @@
 Shared methods.
 """
 
-# ruff: noqa: PLR2004 S101 INP001
+# ruff: noqa: PLR2004, INP001
 
 
 def check_all_played(total_songs: int, playorder: tuple[int]) -> bool:

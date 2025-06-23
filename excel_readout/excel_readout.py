@@ -50,7 +50,7 @@ for sheet in config.sections():
 # create and open output Excel file
 workbook_out = openpyxl.Workbook()
 sheet_out = workbook_out.active
-assert sheet_out  # noqa: S101
+assert sheet_out
 
 # write header row
 row_out = 1
