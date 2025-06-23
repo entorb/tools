@@ -10,8 +10,6 @@ https://github.com/entorb/analyze-activities/blob/main/src/git_1_export_history.
 https://github.com/entorb/analyze-activities/blob/main/src/git_2_analyze.py
 """  # noqa: INP001
 
-# ruff: noqa: S101
-
 import datetime as dt
 import os
 import re
@@ -30,7 +28,7 @@ def run_git_log() -> str:
     filter: author=Torben
     """
     # git log --author="Torben" --date=iso-strict --pretty=format:'%cd<!!Split!!>%h<!!Split!!>%s<!!Split!!>%cn<!!Split!!>%an' --shortstat  # noqa: E501
-    sp = subprocess.run(  # noqa: S603
+    sp = subprocess.run(
         [  # noqa: S607
             "git",
             "log",
