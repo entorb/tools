@@ -3,15 +3,16 @@
 # edit git history
 # combine all changes on certain files into a single commit
 
+# Works for files (1.txt), dirs (data), subdirectory paths (src/1.txt, apps/1x1/README.md), and globs (apps/*/README.md)
+
 # pip install git-filter-repo
-# cspell:disable-next-line
-REPO=meeting-meter
+REPO=flashcards
 DIR=/tmp/git-filter-repo-clone/
 BACKUP=/tmp/git-filter-repo-backup
 
 cd /tmp
-mkdir $DIR
-mkdir $BACKUP
+mkdir -p $DIR
+mkdir -p $BACKUP
 
 cd $DIR
 git clone git@github.com:entorb/$REPO.git
@@ -20,32 +21,42 @@ cd $REPO
 # backup .git/config
 cp .git/config $BACKUP/config
 
-MSG="Tools"
+MSG="Documentation"
 FILES=(
-    .editorconfig
-    .github
-    .pre-commit-config.yaml
-    .prettierignore
-    .prettierrc.json
-    .sonarcloud.properties
-    .vscode
-    cspell.config.yaml
-    cspell.json
-    eslint.config.ts
-    ruff.toml
-    sonar-project.properties
+    AGENTS.md
+    apps/*/AGENTS.md
+    apps/*/README.md
+    cspell-words.txt
+    deployment.md
+    packages/shared/AGENTS.md
+    packages/shared/README.md
+    README.md
+    TODO.md
 )
 
-# MSG="README cspell gitignore"
+# MSG="Tools"
 # FILES=(
+#     .editorconfig
+#     .github
 #     .gitignore
-#     cspell-words.txt
-#     deployment.md
-#     README.md
+#     .pre-commit-config.yaml
+#     .prettierignore
+#     .prettierrc.json
+#     .sonarcloud.properties
+#     .sonarlint
+#     .vscode
+#     cspell.config.yaml
+#     cspell.json
+#     eslint.config.ts
+#     ruff.toml
+#     sonar-project.properties
 # )
 
 # MSG="Scripts"
-# FILES=(scripts)
+# FILES=(
+#     scripts
+#     apps/*/scripts
+# )
 
 # MSG="Lock"
 # FILES=(
@@ -57,6 +68,8 @@ FILES=(
 # MSG="Packages"
 # FILES=(
 #     package.json
+#     apps/*/package.json
+#     packages/shared/package.json
 #     pyproject.toml
 #     requirements-dev.txt
 #     requirements.txt
@@ -64,8 +77,22 @@ FILES=(
 
 # MSG="Cypress"
 # FILES=(
+#     apps/*/cypress
+#     apps/*/cypress.config.ts
 #     cypress
 #     cypress.config.ts
+# )
+
+# MSG="Vitest"
+# FILES=(
+#     apps/*/src/__tests__
+#     packages/shared/src/__tests__
+#     apps/wordplay/src/pages/HomePage.spec.ts
+# )
+
+# MSG="Icons"
+# FILES=(
+#     apps/*/assets/icon.svg
 # )
 
 # MSG="AI-Tools"
@@ -78,7 +105,9 @@ FILES=(
 
 for FILE in "${FILES[@]}"; do
     if [ -e "$FILE" ]; then
-    cp -r $FILE $BACKUP/
+        # Preserve directory structure in backup
+        mkdir -p "$BACKUP/$(dirname "$FILE")"
+        cp -r "$FILE" "$BACKUP/$FILE"
     fi
 done
 
@@ -96,7 +125,9 @@ cp $BACKUP/config .git/
 # restore FILES
 for FILE in "${FILES[@]}"; do
     if [ -e "$BACKUP/$FILE" ]; then
-    cp -r $BACKUP/$FILE ./
+        # Preserve directory structure when restoring
+        mkdir -p "$(dirname "$FILE")"
+        cp -r "$BACKUP/$FILE" "$FILE"
     fi
 done
 
@@ -118,4 +149,6 @@ cd /tmp
 rm -rf $BACKUP
 rm -rf $DIR
 
-echo "->" now run  git fetch origin \& git reset --hard origin/main  on in your repo.
+echo "->" now run
+echo  git fetch origin \&\& git reset --hard origin/main
+echo on in your repo.
