@@ -1,7 +1,10 @@
 #!/bin/bash
 
 for D in $(ls -d */); do
-    if [ $D == "zzz_other/" ]; then continue; fi
+    # skip dirs starting with zzz_
+    case $D in
+    zzz_*) continue ;;
+    esac
     # if [ $D == "template-python/" ]; then continue; fi
     # if [ $D == "hpmor-de/" ]; then continue; fi
 
