@@ -9,14 +9,21 @@
 REPO=flashcards
 DIR=/tmp/git-filter-repo-clone/
 BACKUP=/tmp/git-filter-repo-backup
+BACKUP_ZIP=~/GitHub/zzz_backup
 
 cd /tmp
+rm -rf $BACKUP
+rm -rf $DIR
 mkdir -p $DIR
 mkdir -p $BACKUP
 
 cd $DIR
 git clone git@github.com:entorb/$REPO.git
 cd $REPO
+
+DATE=`date +"%y%m%d_%H%M%S"`
+echo zipping to $BACKUP_ZIP/$REPO-$DATE.zip
+zip -r9q $BACKUP_ZIP/$REPO-$DATE.zip . -x '.git/*'
 
 # backup .git/config
 cp .git/config $BACKUP/config
