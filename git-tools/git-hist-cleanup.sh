@@ -6,7 +6,7 @@
 # Works for files (1.txt), dirs (data), subdirectory paths (src/1.txt, apps/1x1/README.md), and globs (apps/*/README.md)
 
 # pip install git-filter-repo
-REPO=flashcards
+REPO=mindchat
 DIR=/tmp/git-filter-repo-clone/
 BACKUP=/tmp/git-filter-repo-backup
 BACKUP_ZIP=~/GitHub/zzz_backup
@@ -41,6 +41,12 @@ FILES=(
     TODO.md
 )
 
+# MSG="Texts"
+# FILES=(
+#     src/texts.py
+#     src/text.py
+# )
+
 # MSG="Tools"
 # FILES=(
 #     .editorconfig
@@ -74,9 +80,10 @@ FILES=(
 
 # MSG="Packages"
 # FILES=(
-#     package.json
 #     apps/*/package.json
+#     package.json
 #     packages/shared/package.json
+#     pnpm-workspace.yaml
 #     pyproject.toml
 #     requirements-dev.txt
 #     requirements.txt
@@ -93,8 +100,8 @@ FILES=(
 # MSG="Vitest"
 # FILES=(
 #     apps/*/src/__tests__
-#     packages/shared/src/__tests__
 #     apps/wordplay/src/pages/HomePage.spec.ts
+#     packages/shared/src/__tests__
 # )
 
 # MSG="Icons"
