@@ -67,9 +67,10 @@ FILES=(
 
 # MSG="Packages"
 # FILES=(
-#     package.json
 #     apps/*/package.json
+#     package.json
 #     packages/shared/package.json
+#     pnpm-workspace.yaml
 #     pyproject.toml
 #     requirements-dev.txt
 #     requirements.txt
@@ -86,8 +87,8 @@ FILES=(
 # MSG="Vitest"
 # FILES=(
 #     apps/*/src/__tests__
-#     packages/shared/src/__tests__
 #     apps/wordplay/src/pages/HomePage.spec.ts
+#     packages/shared/src/__tests__
 # )
 
 # MSG="Icons"
