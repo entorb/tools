@@ -86,7 +86,7 @@ def plot_results(
     df = df.set_index(["num_songs_played"])
     # print(df.head())
 
-    fig, axes = plt.subplots(figsize=(8.00, 6.00))  # 10.80/2, 19.20/2
+    _fig, axes = plt.subplots(figsize=(8.00, 6.00))  # 10.80/2, 19.20/2
     df["pct_80pct_played"].plot(linewidth=2.0, legend=True, zorder=1)
     df["pct_all_played"].plot(linewidth=2.0, legend=True, zorder=2)
     plt.grid(axis="both")
