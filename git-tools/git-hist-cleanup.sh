@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# !!! better use git-all-repo-hist-cleanup.py !!!
+
+
 # edit git history
 # combine all changes on certain files into a single commit
 
@@ -52,6 +56,7 @@ FILES=(
 #     .editorconfig
 #     .github
 #     .gitignore
+#     .gitattributes
 #     .pre-commit-config.yaml
 #     .prettierignore
 #     .prettierrc.json
@@ -62,14 +67,12 @@ FILES=(
 #     cspell.json
 #     eslint.config.ts
 #     ruff.toml
+#     .ruff.toml
+#     setup.cfg
+#     scripts
 #     sonar-project.properties
 # )
 
-# MSG="Scripts"
-# FILES=(
-#     scripts
-#     apps/*/scripts
-# )
 
 # MSG="Lock"
 # FILES=(
