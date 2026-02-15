@@ -17,6 +17,25 @@ REPOS_DIR = Path.home() / "GitHub"
 BACKUP_DIR_ZIP = REPOS_DIR / "zzz_backup"
 BACKUP_DIR_ZIP.mkdir(parents=True, exist_ok=True)
 
+USE_DOC = False
+USE_LOCK = True
+USE_PACKAGES = False
+USE_TOOLS = False
+
+print(f"\n{USE_DOC=}\n{USE_LOCK=}\n{USE_PACKAGES=}\n{USE_TOOLS=}\n")
+
+# Get all directories (repos)
+LIST_REPOS = sorted(
+    [
+        Path(d)
+        for d in REPOS_DIR.iterdir()
+        if d.is_dir() and not d.name.startswith("zzz_") and d.name != "hpmor-de"
+    ]
+)
+# single repo only overwrite
+# cspell:disable-next-line
+LIST_REPOS = [Path("korrekturleser")]
+
 # Clean up and create directories
 for dir_path in [CLONE_DIR, BACKUP_DIR]:
     if dir_path.exists():
@@ -33,8 +52,9 @@ FILES_DOC = [
     "README.md",
     "TODO.md",
     "apps/1x1/AGENTS.md",
-    "apps/voc/AGENTS.md",
+    "apps/eta/AGENTS.md",
     "apps/lwk/AGENTS.md",
+    "apps/voc/AGENTS.md",
     "packages/shared/AGENTS.md",
 ]
 
@@ -65,11 +85,12 @@ FILES_LOCK = [
     "uv.lock",
 ]
 
-FILE_PACKAGES = [
+FILES_PACKAGES = [
     "package.json",
     "apps/1x1/package.json",
-    "apps/voc/package.json",
+    "apps/eta/package.json",
     "apps/lwk/package.json",
+    "apps/voc/package.json",
     "packages/shared/package.json",
     "pnpm-workspace.yaml",
     "pyproject.toml",
@@ -98,17 +119,6 @@ def restore_and_commit(
         subprocess.run(["git", "commit", "-m", commit_message], check=True)  # noqa: S603, S607
 
 
-# Get all directories (repos)
-LIST_REPOS = sorted(
-    [
-        Path(d)
-        for d in REPOS_DIR.iterdir()
-        if d.is_dir() and not d.name.startswith("zzz_") and d.name != "hpmor-de"
-    ]
-)
-
-# single repo
-# LIST_REPOS = [Path("flashcards")]
 for d in LIST_REPOS:
     repo_name = d.name
 
@@ -143,8 +153,15 @@ for d in LIST_REPOS:
     backup_repo_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(".git/config", backup_repo_dir / ".git-config")
 
-    # Merge both lists
-    files = FILES_DOC + FILES_TOOLS + FILES_LOCK + FILE_PACKAGES
+    files: list[str] = []
+    if USE_DOC:
+        files.extend(FILES_DOC)
+    if USE_LOCK:
+        files.extend(FILES_LOCK)
+    if USE_PACKAGES:
+        files.extend(FILES_PACKAGES)
+    if USE_TOOLS:
+        files.extend(FILES_TOOLS)
 
     # Copy all files to backup
     for file in files:
@@ -177,10 +194,14 @@ for d in LIST_REPOS:
     shutil.move(backup_repo_dir / ".git-config", ".git/config")
 
     # Restore and commit files
-    restore_and_commit(FILES_LOCK, backup_repo_dir, "Lock")
-    restore_and_commit(FILE_PACKAGES, backup_repo_dir, "Packages")
-    restore_and_commit(FILES_DOC, backup_repo_dir, "Documentation")
-    restore_and_commit(FILES_TOOLS, backup_repo_dir, "Tools")
+    if USE_LOCK:
+        restore_and_commit(FILES_LOCK, backup_repo_dir, "Lock")
+    if USE_PACKAGES:
+        restore_and_commit(FILES_PACKAGES, backup_repo_dir, "Packages")
+    if USE_DOC:
+        restore_and_commit(FILES_DOC, backup_repo_dir, "Documentation")
+    if USE_TOOLS:
+        restore_and_commit(FILES_TOOLS, backup_repo_dir, "Tools")
 
     # Explicit cleanup (git-filter-repo usually does this already)
     subprocess.run(["git", "reflog", "expire", "--expire=now", "--all"], check=True)  # noqa: S607
