@@ -17,12 +17,12 @@ REPOS_DIR = Path.home() / "GitHub"
 BACKUP_DIR_ZIP = REPOS_DIR / "zzz_backup"
 BACKUP_DIR_ZIP.mkdir(parents=True, exist_ok=True)
 
-USE_DOC = False
-USE_LOCK = True
-USE_PACKAGES = False
-USE_TOOLS = False
+DO_DOC = True
+DO_LOCK = True
+DO_PACKAGES = True
+DO_TOOLS = True
 
-print(f"\n{USE_DOC=}\n{USE_LOCK=}\n{USE_PACKAGES=}\n{USE_TOOLS=}\n")
+print(f"\n{DO_DOC=}\n{DO_LOCK=}\n{DO_PACKAGES=}\n{DO_TOOLS=}\n")
 
 # Get all directories (repos)
 LIST_REPOS = sorted(
@@ -34,7 +34,7 @@ LIST_REPOS = sorted(
 )
 # single repo only overwrite
 # cspell:disable-next-line
-LIST_REPOS = [Path("korrekturleser")]
+LIST_REPOS = [Path("template-python")]
 
 # Clean up and create directories
 for dir_path in [CLONE_DIR, BACKUP_DIR]:
@@ -47,10 +47,10 @@ for dir_path in [CLONE_DIR, BACKUP_DIR]:
 # for dirs: enter no trailing / (.github/workflows)
 # files in subdirs are fine (app/1x1/README.md)
 FILES_DOC = [
+    "TODO.md",
     "cspell-words.txt",
     "AGENTS.md",
     "README.md",
-    "TODO.md",
     "apps/1x1/AGENTS.md",
     "apps/eta/AGENTS.md",
     "apps/lwk/AGENTS.md",
@@ -154,13 +154,13 @@ for d in LIST_REPOS:
     shutil.copy2(".git/config", backup_repo_dir / ".git-config")
 
     files: list[str] = []
-    if USE_DOC:
+    if DO_DOC:
         files.extend(FILES_DOC)
-    if USE_LOCK:
+    if DO_LOCK:
         files.extend(FILES_LOCK)
-    if USE_PACKAGES:
+    if DO_PACKAGES:
         files.extend(FILES_PACKAGES)
-    if USE_TOOLS:
+    if DO_TOOLS:
         files.extend(FILES_TOOLS)
 
     # Copy all files to backup
@@ -194,13 +194,13 @@ for d in LIST_REPOS:
     shutil.move(backup_repo_dir / ".git-config", ".git/config")
 
     # Restore and commit files
-    if USE_LOCK:
+    if DO_LOCK:
         restore_and_commit(FILES_LOCK, backup_repo_dir, "Lock")
-    if USE_PACKAGES:
+    if DO_PACKAGES:
         restore_and_commit(FILES_PACKAGES, backup_repo_dir, "Packages")
-    if USE_DOC:
+    if DO_DOC:
         restore_and_commit(FILES_DOC, backup_repo_dir, "Documentation")
-    if USE_TOOLS:
+    if DO_TOOLS:
         restore_and_commit(FILES_TOOLS, backup_repo_dir, "Tools")
 
     # Explicit cleanup (git-filter-repo usually does this already)
