@@ -2,12 +2,14 @@
 autoflake
 autoupdate
 axisbelow
+creds
 dels
 entorb
 figsize
 fontsize
 getpid
 hpmor
+IMAP
 isort
 labelpad
 Menke
@@ -34,6 +36,7 @@ strava
 timestart
 Torben
 typonuketool
+uberspace
 Vitest
 xlabel
 yaxis
