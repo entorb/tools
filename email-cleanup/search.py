@@ -14,14 +14,15 @@ from pathlib import Path
 IMAP_CREDS = Path("creds-uberspace.toml")
 IMAP_FOLDER = "INBOX"
 
-IMAP_CREDS = Path("creds-web.toml")
-IMAP_FOLDER = "Unbekannt"  # "INBOX", "Unbekannt"
+# IMAP_CREDS = Path("creds-web.toml")
+# IMAP_FOLDER = "Unbekannt"  # "INBOX", "Unbekannt"
 
 
 # --- config ---
 FETCH_LAST_N = 1_000
 TOP_N = 50
 CSV_DIR = Path("out")
+CSV_DIR.mkdir(exist_ok=True)
 
 
 # --- data ---
@@ -71,12 +72,17 @@ def normalize_subject(raw: str) -> str:
 
     use leading [tag] as key if present, else collapse numbers and truncate to 5 words.
     """
+    # [topic] ...
     subj = decode_subject(raw)
     if m := re.match(r"(\[[^\]]+\])", subj):
         return m.group(1).lower()
+    subj = subj.lower().strip()
+
+    subj = re.sub(r"^(?:(?:re|aw|fwd): )+", "", subj)  # leading re:/aw:
+
     subj = re.sub(r"\d+", "N", subj)  # collapse all numbers to N
     subj = " ".join(subj.split()[:5])  # first 5 words only
-    return subj.strip().lower()
+    return subj.strip()
 
 
 def fetch_stats(conn: imaplib.IMAP4_SSL) -> MailStats:
