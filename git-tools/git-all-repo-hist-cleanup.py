@@ -17,9 +17,9 @@ REPOS_DIR = Path.home() / "GitHub"
 BACKUP_DIR_ZIP = REPOS_DIR / "zzz_backup"
 BACKUP_DIR_ZIP.mkdir(parents=True, exist_ok=True)
 
-DO_DOC = True
-DO_LOCK = True
-DO_PACKAGES = True
+DO_DOC = False
+DO_LOCK = False
+DO_PACKAGES = False
 DO_TOOLS = True
 
 print(f"\n{DO_DOC=}\n{DO_LOCK=}\n{DO_PACKAGES=}\n{DO_TOOLS=}\n")
@@ -34,7 +34,7 @@ LIST_REPOS = sorted(
 )
 # single repo only overwrite
 # cspell:disable-next-line
-LIST_REPOS = [Path("flashcards")]
+# LIST_REPOS = [Path("flashcards")]
 
 # Clean up and create directories
 for dir_path in [CLONE_DIR, BACKUP_DIR]:
