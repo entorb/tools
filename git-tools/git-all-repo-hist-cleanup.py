@@ -34,7 +34,7 @@ LIST_REPOS = sorted(
 )
 # single repo only overwrite
 # cspell:disable-next-line
-LIST_REPOS = [Path("template-python")]
+LIST_REPOS = [Path("flashcards")]
 
 # Clean up and create directories
 for dir_path in [CLONE_DIR, BACKUP_DIR]:
@@ -52,8 +52,10 @@ FILES_DOC = [
     "AGENTS.md",
     "README.md",
     "apps/1x1/AGENTS.md",
+    "apps/div/AGENTS.md",
     "apps/eta/AGENTS.md",
     "apps/lwk/AGENTS.md",
+    "apps/pum/AGENTS.md",
     "apps/voc/AGENTS.md",
     "packages/shared/AGENTS.md",
 ]
@@ -88,8 +90,10 @@ FILES_LOCK = [
 FILES_PACKAGES = [
     "package.json",
     "apps/1x1/package.json",
+    "apps/div/package.json",
     "apps/eta/package.json",
     "apps/lwk/package.json",
+    "apps/pum/package.json",
     "apps/voc/package.json",
     "packages/shared/package.json",
     "pnpm-workspace.yaml",
