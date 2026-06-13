@@ -18,9 +18,9 @@ BACKUP_DIR_ZIP = REPOS_DIR / "zzz_backup"
 BACKUP_DIR_ZIP.mkdir(parents=True, exist_ok=True)
 
 DO_DOC = False
-DO_LOCK = False
+DO_LOCK = True
 DO_PACKAGES = False
-DO_TOOLS = True
+DO_TOOLS = False
 
 print(f"\n{DO_DOC=}\n{DO_LOCK=}\n{DO_PACKAGES=}\n{DO_TOOLS=}\n")
 
