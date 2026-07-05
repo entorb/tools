@@ -34,7 +34,7 @@ LIST_REPOS = sorted(
 )
 # single repo only overwrite
 # cspell:disable-next-line
-# LIST_REPOS = [Path("flashcards")]
+LIST_REPOS = [Path("flashcards")]
 
 # Clean up and create directories
 for dir_path in [CLONE_DIR, BACKUP_DIR]:
