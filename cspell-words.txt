@@ -20,6 +20,7 @@ onefile
 oneline
 playorder
 playorders
+prek
 pycache
 pyinstaller
 pyproject
