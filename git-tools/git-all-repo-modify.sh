@@ -16,8 +16,8 @@ for D in */; do
     git checkout main
     git pull
     # if [ -f .pre-commit-config.yaml ]; then
-    #     pre-commit autoupdate
-    #     pre-commit run --all-files
+    #     prek autoupdate
+    #     prek run --all-files
     #     git status
     #     # read -p "commit changes? (y/n) " choice
     #     # if [ "$choice" == "y" ]; then
