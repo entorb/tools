@@ -1,8 +1,6 @@
 #!/bin/bash
 
-
 # !!! better use git-all-repo-hist-cleanup.py !!!
-
 
 # edit git history
 # combine all changes on certain files into a single commit
@@ -25,7 +23,7 @@ cd $DIR
 git clone git@github.com:entorb/$REPO.git
 cd $REPO
 
-DATE=`date +"%y%m%d_%H%M%S"`
+DATE=$(date +"%y%m%d_%H%M%S")
 echo zipping to $BACKUP_ZIP/$REPO-$DATE.zip
 zip -r9q $BACKUP_ZIP/$REPO-$DATE.zip . -x '.git/*'
 
@@ -34,15 +32,15 @@ cp .git/config $BACKUP/config
 
 MSG="Documentation"
 FILES=(
-    AGENTS.md
-    apps/*/AGENTS.md
-    apps/*/README.md
-    cspell-words.txt
-    deployment.md
-    packages/shared/AGENTS.md
-    packages/shared/README.md
-    README.md
-    TODO.md
+  AGENTS.md
+  apps/*/AGENTS.md
+  apps/*/README.md
+  cspell-words.txt
+  deployment.md
+  packages/shared/AGENTS.md
+  packages/shared/README.md
+  README.md
+  TODO.md
 )
 
 # MSG="Texts"
@@ -72,7 +70,6 @@ FILES=(
 #     scripts
 #     sonar-project.properties
 # )
-
 
 # MSG="Lock"
 # FILES=(
@@ -121,16 +118,16 @@ FILES=(
 # )
 
 for FILE in "${FILES[@]}"; do
-    if [ -e "$FILE" ]; then
-        # Preserve directory structure in backup
-        mkdir -p "$BACKUP/$(dirname "$FILE")"
-        cp -r "$FILE" "$BACKUP/$FILE"
-    fi
+  if [ -e "$FILE" ]; then
+    # Preserve directory structure in backup
+    mkdir -p "$BACKUP/$(dirname "$FILE")"
+    cp -r "$FILE" "$BACKUP/$FILE"
+  fi
 done
 
 CMD="git-filter-repo --prune-empty always --invert-paths"
 for FILE in "${FILES[@]}"; do
-    CMD="$CMD --path $FILE"
+  CMD="$CMD --path $FILE"
 done
 echo "->" $CMD
 read -p "Enter to run fit-filter-repo ..."
@@ -141,11 +138,11 @@ cp $BACKUP/config .git/
 
 # restore FILES
 for FILE in "${FILES[@]}"; do
-    if [ -e "$BACKUP/$FILE" ]; then
-        # Preserve directory structure when restoring
-        mkdir -p "$(dirname "$FILE")"
-        cp -r "$BACKUP/$FILE" "$FILE"
-    fi
+  if [ -e "$BACKUP/$FILE" ]; then
+    # Preserve directory structure when restoring
+    mkdir -p "$(dirname "$FILE")"
+    cp -r "$BACKUP/$FILE" "$FILE"
+  fi
 done
 
 git status
@@ -167,5 +164,5 @@ rm -rf $BACKUP
 rm -rf $DIR
 
 echo "->" now run
-echo  git fetch origin \&\& git reset --hard origin/main
+echo git fetch origin \&\& git reset --hard origin/main
 echo on in your repo.

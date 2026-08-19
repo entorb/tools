@@ -23,10 +23,10 @@ git log --pretty=oneline --reverse | head -1
 
 max=$(git log --oneline | wc -l)
 for i in $(seq $max -100 1); do
-    echo $i
-    # cspell:disable-next-line
-    g=$(git log --reverse --oneline --skip $i -n1 | perl -alne'print $F[0]')
-    git push origin $g:refs/heads/master
+  echo $i
+  # cspell:disable-next-line
+  g=$(git log --reverse --oneline --skip $i -n1 | perl -alne'print $F[0]')
+  git push origin $g:refs/heads/master
 done
 
 #1 create

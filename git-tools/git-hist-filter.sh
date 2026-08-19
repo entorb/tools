@@ -20,12 +20,12 @@ cd $REPO
 cp .git/config $BACKUP/config
 
 FILES=(
-    sql2csv_postgresql.py
+  sql2csv_postgresql.py
 )
 
 CMD="git-filter-repo --prune-empty always --invert-paths"
 for FILE in "${FILES[@]}"; do
-    CMD="$CMD --path \"$FILE\""
+  CMD="$CMD --path \"$FILE\""
 done
 echo $CMD
 read -p "Enter to resume ..."
