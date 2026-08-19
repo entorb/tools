@@ -72,7 +72,7 @@ FILES_TOOLS = [
     ".sonarlint",  # dir
     ".vscode",  # dir
     "biome.json",
-    "git-tools/git-all-repo-hist-cleanup.py",  # TODO
+    ".pre-commit-config.yaml",  # TODO
     "cspell-words-missing.txt",
     "cspell.config.yaml",
     "cspell.json",
