@@ -6,13 +6,15 @@
 for D in */; do
 	# skip dirs starting with zzz_ as well as hpmor-de/
 	case $D in
-	zzz_*/) continue ;;
+	zzz_*/ | hpmor-de/) continue ;;
 	esac
 
 	echo "==="
 	echo "=== $D ===="
 	echo "==="
 	cd "$D"
+
+	../git-squash-same-message.sh
 
 	# git checkout main
 	# git pull
@@ -31,7 +33,6 @@ for D in */; do
 	# cp ../korrekturleser/scripts/chk_spelling.sh scripts/
 	# cp ../korrekturleser/scripts/run_checks.sh scripts/
 
-	../squash-same-message.sh
 	# if [[ $(git status --porcelain) ]]; then
 
 	# add only if exist
