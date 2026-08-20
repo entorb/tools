@@ -14,7 +14,8 @@ for D in */; do
 	echo "==="
 	cd "$D"
 
-	../git-squash-same-message.sh
+	# ../git-squash-same-message.sh
+	git push -f
 
 	# git checkout main
 	# git pull
