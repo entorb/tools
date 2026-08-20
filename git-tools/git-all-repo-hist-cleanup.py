@@ -65,6 +65,7 @@ FILES_TOOLS = [
     ".github",  # dir
     ".github/dependabot.yml",
     ".gitignore",
+    ".pre-commit-config.yaml",  # TODO
     ".prettierignore",
     ".prettierrc.json",
     ".rumdl.toml",
@@ -72,7 +73,6 @@ FILES_TOOLS = [
     ".sonarlint",  # dir
     ".vscode",  # dir
     "biome.json",
-    ".pre-commit-config.yaml",  # TODO
     "cspell-words-missing.txt",
     "cspell.config.yaml",
     "cspell.json",
@@ -82,6 +82,8 @@ FILES_TOOLS = [
     "ruff.toml",
     "scripts",  # dir
     "sonar-project.properties",
+    "update_deploy_all_frontent_apps.sh",  # TODO
+    "update_deploy_all_streamlits.sh",  # TODO
 ]
 
 FILES_LOCK = [
@@ -101,6 +103,8 @@ FILES_PACKAGES = [
     "packages/shared/package.json",
     "pnpm-workspace.yaml",
     "pyproject.toml",
+    "streamlit-stats/pyproject.toml",  # TODO
+    "streamlit-stats/uv.lock",  # TODO
     "requirements-all.txt",
     "requirements-dev.txt",
     "requirements.txt",
