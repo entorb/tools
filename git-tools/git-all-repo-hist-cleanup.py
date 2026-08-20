@@ -34,7 +34,7 @@ LIST_REPOS = sorted(
 )
 # single repo only overwrite
 # cspell:disable-next-line
-# LIST_REPOS = [Path("private")]
+LIST_REPOS = [Path("tools")]
 
 # Clean up and create directories
 for dir_path in [CLONE_DIR, BACKUP_DIR]:
