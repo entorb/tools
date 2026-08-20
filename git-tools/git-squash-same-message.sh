@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-SCOPE="unpublished" # "unpublished" or "all"
+SCOPE="all" # "unpublished" or "all"
 
 if [ "$SCOPE" = "all" ]; then
 	range="HEAD"
