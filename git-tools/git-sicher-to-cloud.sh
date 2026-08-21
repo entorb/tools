@@ -5,18 +5,17 @@ set -eu
 
 cd ~/GitHub
 
-# cleanup
+echo "## cleanup repos"
 sh private/python-go-rust/cleanup.sh
 sh hpmor-de/scripts/cleanup.sh
-rm -f hpmor-de/*.pdf
 
 TIMESTAMP=$(date +%y%m%d-%H%M)
-OUT="GitHub-${TIMESTAMP}.tar.xz"
-
-ZIPLIST=$(mktemp)
-trap 'rm -f "$ZIPLIST"' EXIT
-
+OUT="zzz_backup/GitHub-${TIMESTAMP}.tar.xz.age-260820"
 rm -f "$OUT"
+
+echo "## find files"
+FILELIST=$(mktemp)
+trap 'rm -f "$FILELIST"' EXIT
 
 find . \
   \( -path "OUT" \
@@ -56,14 +55,19 @@ find . \
   ! -name "pnpm-lock.yaml" \
   ! -name "uv.lock" \
   ! -size +1M \
-  -print >$ZIPLIST
+  -print >$FILELIST
 # max 1MB
 
-# zip -9 -X -@ "$OUT" <$ZIPLIST
-tar -cf - -T $ZIPLIST | xz -6 >"$OUT"
+echo "## create archive: tar + xz + age"
+
+# zip -9 -X -@ "$OUT" <$FILELIST
+# tar -cf - -T $FILELIST | xz -6 >"$OUT"
+
+tar -cf - -T "$FILELIST" | xz -9 | age -R ~/geheim/age-260820.pub -o "$OUT"
 
 echo "Created: $(pwd)/$OUT"
 
-# TODO: add encryption via age
-# mv "$OUT" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Sicher/T-MB-2/"
-# mv "$OUT" /tmp
+echo "## upload to pCloud"
+rclone copy "$OUT" pcloud:/Sicher/T-MB-2/ --progress
+echo "## upload to Goole Drive"
+rclone copy "$OUT" google:/Sicher/T-MB-2/ --progress
