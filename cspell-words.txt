@@ -6,6 +6,7 @@ dels
 entorb
 figsize
 fontsize
+frontent
 getpid
 hpmor
 IMAP
@@ -36,6 +37,7 @@ sonarlint
 sonarqube
 speepup
 strava
+streamlits
 timestart
 Torben
 typonuketool
