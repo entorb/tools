@@ -6,7 +6,7 @@
 for D in */; do
   # skip dirs starting with zzz_ as well as hpmor-de/
   case $D in
-    zzz_*/ | hpmor-de/) continue ;;
+  zzz_*/ | hpmor-de/) continue ;;
   esac
 
   echo "==="
@@ -15,7 +15,6 @@ for D in */; do
   cd "$D"
 
   # ../git-squash-same-message.sh
-  git push -f
 
   # git checkout main
   # git pull
@@ -23,6 +22,10 @@ for D in */; do
   # git checkout -- cspell-words.txt
   # echo shfmt >>cspell-words.txt
   # prek run --all-files
+
+  git add prek.toml
+  git commit -m "prek.toml"
+  git push
 
   # revert changes to file
   # if [[ $(git status --porcelain) ]]; then
