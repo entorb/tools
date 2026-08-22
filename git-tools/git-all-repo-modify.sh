@@ -6,7 +6,7 @@
 for D in */; do
   # skip dirs starting with zzz_ as well as hpmor-de/
   case $D in
-  zzz_*/ | hpmor-de/) continue ;;
+    zzz_*/ | hpmor-de/) continue ;;
   esac
 
   echo "==="
