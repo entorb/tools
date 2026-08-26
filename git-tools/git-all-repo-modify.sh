@@ -5,9 +5,9 @@ set -e
 
 for D in */; do
   # skip dirs starting with zzz_ as well as hpmor-de/
-  case $D in
-    zzz_*/ | hpmor-de/) continue ;;
-  esac
+  if [[ $D == zzz_*/ || $D == hpmor-de/ ]]; then
+    continue
+  fi
 
   echo "==="
   echo "=== $D ===="
@@ -38,20 +38,17 @@ for D in */; do
   # fi
 
   if [[ $(git status --porcelain) ]]; then
-    if [ -f cspell.config.yaml ]; then
-      git add cspell.config.yaml
-      git commit -m "chore: cspell.config.yaml" || true
-    fi
-    if [ -f .github/workflows/check.yml ]; then
-      git add .github/workflows/*.yml
-      git commit -m "chore: check.yml" || true
+    FILE=.pre-commit-config.yaml
+    if [ -f $FILE ]; then
+      git add $FILE
+      git commit -m "chore: pre-commit add gitleaks"
     fi
     git push
   fi
 
   # ../git-hist-cleanup.py
-  # git add prek.toml
-  # git commit -m "prek.toml"
+  # git add .pre-commit-config.yaml
+  # git commit -m ".pre-commit-config.yaml"
   # git push
 
   # reset author
@@ -70,10 +67,10 @@ for D in */; do
 
   # if [[ $(git status --porcelain) ]]; then
   # add only if exist
-  # for f in scripts prek.toml cspell-words.txt; do
+  # for f in scripts .pre-commit-config.yaml cspell-words.txt; do
   # 	[ -f "$f" ] && git add "$f"
   # done
-  # for f in scripts prek.toml cspell-words.txt; do
+  # for f in scripts .pre-commit-config.yaml cspell-words.txt; do
   #   [ -d "$f" ] && git add "$f"
   # done
   # git commit -m "prek: add shfmt"
