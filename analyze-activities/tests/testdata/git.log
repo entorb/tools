@@ -1,0 +1,26 @@
+2024-12-27T02:57:51+01:00: Update .gitattributes
+ 1 file changed, 1 insertion(+)
+
+2023-03-18T08:56:54+01:00: Update README.md
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+2022-07-30T18:15:38+02:00: chmod u+x
+ 7 files changed, 0 insertions(+), 0 deletions(-)
+
+2021-05-27T11:37:25+02:00: Rename disputation.tex to Dispu.tex
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+2021-05-27T11:36:57+02:00: Rename 130719-Dispu.tex to disputation.tex
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+2021-05-27T11:36:06+02:00: Update README.md
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+2021-05-27T11:35:06+02:00: added disputation
+ 167 files changed, 1545 insertions(+), 4 deletions(-)
+
+2021-05-13T19:21:44+02:00: Update README.md
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+2021-05-13T19:10:49+02:00: Initial commit
+ 154 files changed, 17770 insertions(+)
