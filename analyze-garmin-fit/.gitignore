@@ -1,0 +1,10 @@
+*.png
+.DS_Store
+/.pytest_cache/
+/.ruff_cache/
+/.rumdl_cache/
+/.venv/
+cspell-words-missing.txt
+data/
+test.py
+uv.lock
