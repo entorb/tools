@@ -38,10 +38,10 @@ for D in */; do
   # fi
 
   if [[ $(git status --porcelain) ]]; then
-    FILE=.pre-commit-config.yaml
+    FILE=.github/workflows/check.yml
     if [ -f $FILE ]; then
       git add $FILE
-      git commit -m "chore: pre-commit add gitleaks"
+      git commit -m "chore: check.yml Gitleaks Cleanup"
     fi
     git push
   fi
