@@ -10,8 +10,8 @@ dictionaryDefinitions:
 dictionaries:
   - cspell-words
 ignorePaths:
-  - ".*"
-  - "dist"
-  - "build"
-  - "node_modules"
-  - "requirements.txt"
+  - '.*'
+  - dist
+  - build
+  - node_modules
+  - requirements.txt
