@@ -11,10 +11,10 @@ dictionaries:
   - cspell-words
 language: en-US
 ignorePaths:
-  - '/.vscode/'
-  - 'cspell-words.txt'
-  - 'cspell.config.yaml'
-  - '/LICENSE'
   - '.*'
-  - 'photo_SyncShrink-old.pl'
-  - 'requirements.txt'
+  - /.vscode/
+  - /LICENSE
+  - cspell-words.txt
+  - cspell.config.yaml
+  - photo_SyncShrink-old.pl
+  - requirements.txt

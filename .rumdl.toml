@@ -1,0 +1,4 @@
+[global]
+disable = ["MD013"] # line-length
+
+exclude = ["analyze-activities/tests/testdata/journal.md"]
