@@ -1,0 +1,12 @@
+ELEMNT
+entorb
+Menke
+prek
+rumdl
+shfmt
+sonarcloud
+SonarQube
+testpaths
+timelast
+Torben
+towardsdatascience
