@@ -57,7 +57,6 @@ import cx_Oracle  # driver for Oracle - pip install cx_Oracle
 import openpyxl  # for Excel writing
 import psycopg2  # PostgreSQL - pip install psycopg2
 import pyodbc  # ODBC driver for MS SQL and others  - pip install pyodbc
-
 from sql2csv_credentials import credentials, hash_salt
 
 # DB drivers

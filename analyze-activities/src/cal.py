@@ -8,7 +8,6 @@ import datetime as dt
 from pathlib import Path
 
 import icalendar
-
 from helper import TZ_DE, TZ_UTC, append_data, export_json
 
 FILE_IN = Path("data/cal.ics")

@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import streamlit as st
-
 from helper import get_photos_db
 
 st.set_page_config(page_title="Mac Photos Report ", page_icon=None, layout="wide")

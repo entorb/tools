@@ -2,7 +2,6 @@
 
 import pandas as pd
 import streamlit as st
-
 from helper import get_db_size, get_logger_from_filename, get_photos_db
 
 logger = get_logger_from_filename(__file__)

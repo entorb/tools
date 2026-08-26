@@ -3,9 +3,8 @@
 from pathlib import Path
 
 import pandas as pd
-from influxdb import DataFrameClient
-
 from influx_creds import creds
+from influxdb import DataFrameClient
 
 FILE_OUT = Path("data/influx-media.csv")
 RETENTION = "y1"

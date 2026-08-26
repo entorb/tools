@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import pytest
-
 from git_2 import datestr_to_dt, extract_data_from_log_entry, process_file
 
 
