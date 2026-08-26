@@ -1,0 +1,11 @@
+.DS_Store
+.pytest_cache/
+.vscode/
+/.pytest_cache/
+/.ruff_cache/
+/.rumdl_cache/
+/.venv/
+__pycache__/
+cspell-words-missing.txt
+playground.py
+uv.lock

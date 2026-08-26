@@ -1,0 +1,12 @@
+bitmath
+DataFrame
+Menke
+osxphotos
+prek
+rumdl
+selectbox
+shfmt
+SonarCloud
+SonarQube
+Streamlit
+Torben
