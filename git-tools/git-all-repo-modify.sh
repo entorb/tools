@@ -6,6 +6,7 @@ set -e
 for D in */; do
   # skip dirs starting with zzz_ as well as hpmor-de/
   if [[ $D == zzz_*/ || $D == hpmor-de/ ]]; then
+    # || $D == korrekturleser/
     continue
   fi
 
@@ -13,6 +14,10 @@ for D in */; do
   echo "=== $D ===="
   echo "==="
   cd "$D"
+
+  # if [ -f biome.json ]; then
+  #   pnpm exec biome check --write --reporter=concise .
+  # fi
 
   # if [[ $(git status --porcelain) ]]; then
   #   git add .github/workflows/*.yml
@@ -37,14 +42,14 @@ for D in */; do
   #   # git commit -m "chore: cspell.config.yaml"
   # fi
 
-  if [[ $(git status --porcelain) ]]; then
-    FILE=.github/workflows/check.yml
-    if [ -f $FILE ]; then
-      git add $FILE
-      git commit -m "chore: check.yml Gitleaks Cleanup"
-    fi
-    git push
-  fi
+  # if [[ $(git status --porcelain) ]]; then
+  #   FILE=.github/workflows/check.yml
+  #   if [ -f $FILE ]; then
+  #     git add $FILE
+  #     git commit -m "chore: check.yml Gitleaks Cleanup"
+  #   fi
+  #   git push
+  # fi
 
   # ../git-hist-cleanup.py
   # git add .pre-commit-config.yaml
@@ -60,11 +65,20 @@ for D in */; do
   #     git checkout -- pyproject.toml
   # fi
 
-  # cp ../korrekturleser/scripts/chk_md_lint.sh scripts/
+  # # update scripts from korrekturleser
+  # if [[ $D == korrekturleser/ ]]; then
+  #   cd ..
+  # fi
+  # rm -f scripts/chk_md_lint.sh
+  # rm -f scripts/chk_ym_lint.sh
   # cp ../korrekturleser/scripts/chk_pre-commit.sh scripts/
   # cp ../korrekturleser/scripts/chk_spelling.sh scripts/
   # cp ../korrekturleser/scripts/run_checks.sh scripts/
-
+  # if [[ $(git status --porcelain) ]]; then
+  #   git add scripts
+  #   git commit -m "Update scripts from Korrekturleser"
+  #   git push
+  # fi
   # if [[ $(git status --porcelain) ]]; then
   # add only if exist
   # for f in scripts .pre-commit-config.yaml cspell-words.txt; do
