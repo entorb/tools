@@ -19,11 +19,17 @@ for D in */; do
   #   pnpm exec biome check --write --reporter=concise .
   # fi
 
-  # if [[ $(git status --porcelain) ]]; then
-  #   git add .github/workflows/*.yml
-  #   git commit -m "Update check.yml"
-  #   git push
-  # fi
+  if [[ $(git status --porcelain) ]]; then
+
+    git add .pre-commit-config.yaml || true
+    git commit -m ".pre-commit-config.yaml" || true
+
+    git add scripts/*.sh || true
+    git commit -m "Scripts" || true
+
+    prek run --all-files || true
+    git push || true
+  fi
   # ../git-hist-cleanup.py
 
   # ../git-squash-same-message.sh
