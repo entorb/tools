@@ -22,8 +22,8 @@ for D in */; do
   if [[ $(git status --porcelain) ]]; then
     git pull || true
 
-    git add biome.json || true
-    git commit -m "biome.json" || true
+    git add .github/workflows/check.yml || true
+    git commit -m "check.yml" || true
 
     # git add .pre-commit-config.yaml || true
     # git commit -m ".pre-commit-config.yaml" || true
