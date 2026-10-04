@@ -20,12 +20,16 @@ for D in */; do
   # fi
 
   if [[ $(git status --porcelain) ]]; then
+    git pull || true
 
-    git add .pre-commit-config.yaml || true
-    git commit -m ".pre-commit-config.yaml" || true
+    git add biome.json || true
+    git commit -m "biome.json" || true
 
-    git add scripts/*.sh || true
-    git commit -m "Scripts" || true
+    # git add .pre-commit-config.yaml || true
+    # git commit -m ".pre-commit-config.yaml" || true
+
+    # git add scripts/*.sh || true
+    # git commit -m "Scripts" || true
 
     prek run --all-files || true
     git push || true
