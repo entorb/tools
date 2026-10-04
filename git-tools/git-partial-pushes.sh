@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2103
 
 # 1. create empty backup repo in GitHub
 # e.g. COVID-19-Coronavirus-German-Regions-OLD-DATA-BACKUP-220730.git
@@ -22,11 +23,11 @@ git log --pretty=oneline --reverse | head -1
 # for init
 
 max=$(git log --oneline | wc -l)
-for i in $(seq $max -100 1); do
-  echo $i
+for i in $(seq "$max" -100 1); do
+  echo "$i"
   # cspell:disable-next-line
-  g=$(git log --reverse --oneline --skip $i -n1 | perl -alne'print $F[0]')
-  git push origin $g:refs/heads/master
+  g=$(git log --reverse --oneline --skip "$i" -n1 | perl -alne'print $F[0]')
+  git push origin "$g":refs/heads/master
 done
 
 #1 create

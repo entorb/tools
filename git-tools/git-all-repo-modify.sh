@@ -14,26 +14,25 @@ for D in */; do
   echo "=== $D ===="
   echo "==="
   cd "$D"
+  prek run --all-files --quiet
 
-  # if [ -f biome.json ]; then
-  #   pnpm exec biome check --write --reporter=concise .
+  # if [[ $(git status --porcelain) ]]; then
+  #   if [ -f .github/workflows/check.yml ]; then
+  #     # git pull || true
+  #     prek run --all-files || true
+
+  #     git add .github/workflows/check.yml || true
+  #     git commit -m "Update check.yml: weekly run" || true
+
+  #     #   # git add .pre-commit-config.yaml || true
+  #     #   # git commit -m ".pre-commit-config.yaml" || true
+
+  #     #   # git add scripts/*.sh || true
+  #     #   # git commit -m "Scripts" || true
+
+  #     git push || true
+  #   fi
   # fi
-
-  if [[ $(git status --porcelain) ]]; then
-    git pull || true
-
-    git add .github/workflows/check.yml || true
-    git commit -m "check.yml" || true
-
-    # git add .pre-commit-config.yaml || true
-    # git commit -m ".pre-commit-config.yaml" || true
-
-    # git add scripts/*.sh || true
-    # git commit -m "Scripts" || true
-
-    prek run --all-files || true
-    git push || true
-  fi
   # ../git-hist-cleanup.py
 
   # ../git-squash-same-message.sh
@@ -82,7 +81,7 @@ for D in */; do
   # rm -f scripts/chk_md_lint.sh
   # rm -f scripts/chk_ym_lint.sh
   # cp ../korrekturleser/scripts/chk_pre-commit.sh scripts/
-  # cp ../korrekturleser/scripts/chk_spelling.sh scripts/
+  # cp ../korrekturleser/scripts/run_spelling.sh scripts/
   # cp ../korrekturleser/scripts/run_checks.sh scripts/
   # if [[ $(git status --porcelain) ]]; then
   #   git add scripts

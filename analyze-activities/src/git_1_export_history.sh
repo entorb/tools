@@ -1,8 +1,10 @@
 #!/bin/bash
+set -e
+# shellcheck disable=SC2103
 
 # ensure we are in the repos root dir
-script_dir=$(dirname $0)
-cd $script_dir/..
+script_dir=$(dirname "$0")
+cd "$script_dir"/..
 
 # cleanup
 rm -fr data/git
@@ -11,7 +13,7 @@ mkdir -p data/git
 cd ..
 
 # loop over all repos
-for D in $(ls -d */); do
+for D in */; do
   # remove trailing /
   D="${D%/}"
 
@@ -21,10 +23,10 @@ for D in $(ls -d */); do
     continue
   fi
 
-  echo $D
-  cd $D
+  echo "$D"
+  cd "$D"
 
-  git log --author=Torben --date=iso-strict --pretty="format:%ad: %s" --shortstat >../analyze-activities/data/git/$D.log
+  git log --author=Torben --date=iso-strict --pretty="format:%ad: %s" --shortstat >../analyze-activities/data/git/"$D".log
 
   cd ..
 done

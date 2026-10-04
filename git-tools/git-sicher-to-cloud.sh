@@ -55,7 +55,7 @@ find . \
   ! -name "pnpm-lock.yaml" \
   ! -name "uv.lock" \
   ! -size +1M \
-  -print >$FILELIST
+  -print >"$FILELIST"
 # max 1MB
 
 echo "## create archive: tar + xz + age"
