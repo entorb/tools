@@ -1,6 +1,8 @@
 #!/bin/bash
+set -e
+# shellcheck disable=SC2103
 
-for D in $(ls -d */); do
+for D in */; do
   # skip dirs starting with zzz_
   case $D in
     zzz_*) continue ;;
@@ -8,7 +10,7 @@ for D in $(ls -d */); do
   echo "==="
   echo "=== $D ===="
   echo "==="
-  cd $D
+  cd "$D"
   git pull
   cd ..
 done
