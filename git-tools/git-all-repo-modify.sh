@@ -14,7 +14,15 @@ for D in */; do
   echo "=== $D ===="
   echo "==="
   cd "$D"
-  prek run --all-files --quiet
+  # prek run --all-files --quiet
+
+  if [ -f scripts/chk_js_package_audit.sh ]; then
+    git pull || true
+    sh scripts/chk_js_package_audit.sh
+    git add package.json pnpm-lock.yaml pnpm-workspace.yaml || true
+    git commit -m "Update packages" || true
+    git push || true
+  fi
 
   # if [[ $(git status --porcelain) ]]; then
   #   if [ -f .github/workflows/check.yml ]; then
