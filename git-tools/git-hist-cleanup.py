@@ -67,6 +67,7 @@ FILES_TOOLS = [
     "eslint.config.ts",
     "knip.json",
     "prek.toml",
+    "renovate.json",
     "ruff.toml",
     "scripts",  # dir
     "setup.cfg",
