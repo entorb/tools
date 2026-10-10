@@ -16,31 +16,39 @@ for D in */; do
   cd "$D"
   # prek run --all-files --quiet
 
-  if [ -f scripts/chk_js_package_audit.sh ]; then
-    git pull || true
-    sh scripts/chk_js_package_audit.sh
-    git add package.json pnpm-lock.yaml pnpm-workspace.yaml || true
-    git commit -m "Update packages" || true
-    git push || true
-  fi
-
-  # if [[ $(git status --porcelain) ]]; then
-  #   if [ -f .github/workflows/check.yml ]; then
-  #     # git pull || true
-  #     prek run --all-files || true
-
-  #     git add .github/workflows/check.yml || true
-  #     git commit -m "Update check.yml: weekly run" || true
-
-  #     #   # git add .pre-commit-config.yaml || true
-  #     #   # git commit -m ".pre-commit-config.yaml" || true
-
-  #     #   # git add scripts/*.sh || true
-  #     #   # git commit -m "Scripts" || true
-
-  #     git push || true
-  #   fi
+  # if [ -f scripts/chk_js_package_audit.sh ]; then
+  #   git pull || true
+  #   sh scripts/chk_js_package_audit.sh
+  #   git add package.json pnpm-lock.yaml pnpm-workspace.yaml || true
+  #   git commit -m "Update packages" || true
+  #   git push || true
   # fi
+
+  # if [ -f renovate.json ]; then
+  #   git pull || true
+  #   cp ../renovate.json renovate.json
+  #   git add renovate.json || true
+  #   git commit -m "Update renovate.json" || true
+  #   git push || true
+  # fi
+
+  if [[ $(git status --porcelain) ]]; then
+    if [ -f .github/workflows/check.yml ]; then
+      git pull || true
+      # prek run --all-files || true
+
+      git add .github/workflows/check.yml || true
+      git commit -m "Update check.yml" || true
+
+      #   # git add .pre-commit-config.yaml || true
+      #   # git commit -m ".pre-commit-config.yaml" || true
+
+      #   # git add scripts/*.sh || true
+      #   # git commit -m "Scripts" || true
+
+      git push || true
+    fi
+  fi
   # ../git-hist-cleanup.py
 
   # ../git-squash-same-message.sh
