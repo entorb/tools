@@ -14,6 +14,13 @@ for D in */; do
   echo "=== $D ===="
   echo "==="
   cd "$D"
+  git pull || true
+  prek autoupdate --cooldown-days 7
+  prek run --all-files --quiet
+  git add .pre-commit-config.yaml || true
+  git commit -m ".pre-commit-config.yaml" || true
+  git push || true
+
   # prek run --all-files --quiet
 
   # if [ -f scripts/chk_js_package_audit.sh ]; then
@@ -32,23 +39,23 @@ for D in */; do
   #   git push || true
   # fi
 
-  if [[ $(git status --porcelain) ]]; then
-    if [ -f .github/workflows/check.yml ]; then
-      git pull || true
-      # prek run --all-files || true
+  # if [[ $(git status --porcelain) ]]; then
+  #   if [ -f .github/workflows/check.yml ]; then
+  #     git pull || true
+  #     # prek run --all-files || true
 
-      git add .github/workflows/check.yml || true
-      git commit -m "Update check.yml" || true
+  #     git add .github/workflows/check.yml || true
+  #     git commit -m "Update check.yml" || true
 
-      #   # git add .pre-commit-config.yaml || true
-      #   # git commit -m ".pre-commit-config.yaml" || true
+  #     #   # git add .pre-commit-config.yaml || true
+  #     #   # git commit -m ".pre-commit-config.yaml" || true
 
-      #   # git add scripts/*.sh || true
-      #   # git commit -m "Scripts" || true
+  #     #   # git add scripts/*.sh || true
+  #     #   # git commit -m "Scripts" || true
 
-      git push || true
-    fi
-  fi
+  #     git push || true
+  #   fi
+  # fi
   # ../git-hist-cleanup.py
 
   # ../git-squash-same-message.sh
