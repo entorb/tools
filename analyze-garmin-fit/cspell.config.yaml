@@ -12,7 +12,7 @@ dictionaries:
   - python
 language: en-US
 ignorePaths:
-  - '.*'
+  - .*
   - /.vscode/
   - /LICENSE
   - cspell-words.txt

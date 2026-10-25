@@ -16,9 +16,10 @@ for D in */; do
   cd "$D"
   git pull || true
   prek autoupdate --cooldown-days 7
+  prek run --all-files --quiet || true
   prek run --all-files --quiet
-  git add .pre-commit-config.yaml || true
-  git commit -m ".pre-commit-config.yaml" || true
+  git add .pre-commit-config.yaml .github/workflows/*.yml cspell.config.yaml || true
+  git commit -m "ryl: .pre-commit-config.yaml GH action, cspell.config.yaml" || true
   git push || true
 
   # prek run --all-files --quiet
