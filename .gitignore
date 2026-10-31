@@ -1,0 +1,10 @@
+.DS_Store
+.vscode/
+.vstags
+/.pytest_cache/
+/.ruff_cache/
+/.rumdl_cache/
+/.venv/
+__pycache__/
+cspell-words-missing.txt
+test.py
