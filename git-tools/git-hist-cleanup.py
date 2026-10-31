@@ -18,9 +18,9 @@ REPOS_DIR = Path.home() / "GitHub"
 BACKUP_DIR_ZIP = REPOS_DIR / "zzz_backup"
 BACKUP_DIR_ZIP.mkdir(parents=True, exist_ok=True)
 
-DO_DOC = True
-DO_LOCK = True
-DO_PACKAGES = True
+DO_DOC = False
+DO_LOCK = False
+DO_PACKAGES = False
 DO_TOOLS = True
 
 print(f"\n{DO_DOC=}\n{DO_LOCK=}\n{DO_PACKAGES=}\n{DO_TOOLS=}\n")
@@ -46,31 +46,27 @@ FILES_DOC = [
 
 FILES_TOOLS = [
     ".gitattributes",
-    ".github",  # dir
+    # ".github",  # dir
     ".github/dependabot.yml",
     ".gitignore",
     ".perltidyrc",
     ".pre-commit-config.yaml",
-    ".prettierignore",
-    ".prettierrc.json",
-    ".ruff.toml",
     ".rumdl.toml",
-    ".ryl.toml",
-    ".sonarcloud.properties",
-    ".sonarlint",  # dir
+    ".ryl.toml",  # TODO: del
+    # ".sonarcloud.properties",
+    # ".sonarlint",  # dir
     ".vscode",  # dir
     "biome.json",
-    "cspell-words-missing.txt",
+    # "cspell-words-missing.txt",
     "cspell.config.yaml",
-    "cspell.json",
-    "eslint.config.ts",
+    "cspell.json",  # TODO: del
+    # "eslint.config.ts",
     "knip.json",
     "prek.toml",
     "renovate.json",
     "ruff.toml",
-    "scripts",  # dir
-    "setup.cfg",
-    "sonar-project.properties",
+    # "scripts",  # dir
+    # "sonar-project.properties",
 ]
 
 FILES_LOCK = [
