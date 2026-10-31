@@ -14,15 +14,16 @@ for D in */; do
   echo "=== $D ===="
   echo "==="
   cd "$D"
+  python ../git-hist-cleanup.py
   # git pull || true
   # prek autoupdate --cooldown-days 7
   # prek run --all-files --quiet || true
   # prek run --all-files --quiet
-  if [[ $(git status --porcelain) ]]; then
-    git add cspell.config.yaml || true
-    git commit -m "cspell.config.yaml" || true
-    git push || true
-  fi
+  # if [[ $(git status --porcelain) ]]; then
+  #   git add cspell.config.yaml || true
+  #   git commit -m "cspell.config.yaml" || true
+  #   git push || true
+  # fi
   # git add .pre-commit-config.yaml .github/workflows/*.yml cspell.config.yaml || true
   # git commit -m "ryl: .pre-commit-config.yaml GH action, cspell.config.yaml" || true
   # git push || true
