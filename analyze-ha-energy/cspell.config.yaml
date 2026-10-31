@@ -11,7 +11,16 @@ dictionaries:
   - cspell-words
 ignorePaths:
   - .*
-  - dist
+  - biome.json
   - build
+  - cspell-words.txt
+  - cspell.config.yaml
+  - dist
+  - LICENSE
   - node_modules
+  - package*.json
+  - pnpm-lock.yaml
+  - pnpm-workspace.yaml
+  - pyproject.toml
   - requirements.txt
+  - uv.lock

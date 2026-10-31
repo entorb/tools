@@ -13,8 +13,14 @@ language: en-US
 ignorePaths:
   - .*
   - /.vscode/
-  - /LICENSE
+  - biome.json
   - cspell-words.txt
   - cspell.config.yaml
+  - LICENSE
   - old
+  - package*.json
+  - pnpm-lock.yaml
+  - pnpm-workspace.yaml
+  - pyproject.toml
   - requirements.txt
+  - uv.lock
