@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Using git-filter-repo (via uvx) to cleanup git history."""
-# ruff:noqa: S108 S603 S607
 
 # run from git repo root dir
 
