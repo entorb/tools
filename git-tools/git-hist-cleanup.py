@@ -19,11 +19,10 @@ BACKUP_DIR_ZIP = REPOS_DIR / "zzz_backup"
 BACKUP_DIR_ZIP.mkdir(parents=True, exist_ok=True)
 
 DO_DOC = False
-DO_LOCK = False
 DO_PACKAGES = False
 DO_TOOLS = True
 
-print(f"\n{DO_DOC=}\n{DO_LOCK=}\n{DO_PACKAGES=}\n{DO_TOOLS=}\n")
+print(f"\n{DO_DOC=}\n{DO_PACKAGES=}\n{DO_TOOLS=}\n")
 
 # supports files and dirs
 # for dirs: enter no trailing / (.github/workflows)
@@ -46,34 +45,25 @@ FILES_DOC = [
 
 FILES_TOOLS = [
     ".gitattributes",
-    # ".github",  # dir
+    ".github",  # dir
     ".github/dependabot.yml",
     ".gitignore",
     ".perltidyrc",
     ".pre-commit-config.yaml",
     ".rumdl.toml",
-    ".ryl.toml",  # TODO: del
-    # ".sonarcloud.properties",
-    # ".sonarlint",  # dir
+    ".sonarcloud.properties",
+    ".sonarlint",  # dir
     ".vscode",  # dir
     "biome.json",
-    # "cspell-words-missing.txt",
+    "cspell-words-missing.txt",
     "cspell.config.yaml",
-    "cspell.json",  # TODO: del
-    # "eslint.config.ts",
+    "eslint.config.ts",
     "knip.json",
     "prek.toml",
     "renovate.json",
     "ruff.toml",
-    # "scripts",  # dir
-    # "sonar-project.properties",
-]
-
-FILES_LOCK = [
-    "package-lock.json",
-    "pnpm-lock.yaml",
-    "uv.lock",
-    "streamlit-stats/uv.lock",  # entorb.net
+    "scripts",  # dir
+    "sonar-project.properties",
 ]
 
 FILES_PACKAGES = [
@@ -83,7 +73,12 @@ FILES_PACKAGES = [
     "requirements-all.txt",
     "requirements-dev.txt",
     "requirements.txt",
-    # flashcards:
+    # lock files
+    "package-lock.json",
+    "pnpm-lock.yaml",
+    "uv.lock",
+    "streamlit-stats/uv.lock",  # entorb.net
+    # flashcards
     "apps/1x1/package.json",
     "apps/div/package.json",
     "apps/eta/package.json",
@@ -133,7 +128,7 @@ os.chdir(clone_path)
 
 # Create zip backup with timestamp
 
-timestamp = datetime.now().strftime("%y%m%d_%H%M%S")  # noqa: DTZ005
+timestamp = datetime.now().strftime("%y%m%d_%H%M%S")
 backup_zip_file = BACKUP_DIR_ZIP / f"{repo_name}-{timestamp}.zip"
 
 print(f"Creating backup: {backup_zip_file}")
@@ -151,8 +146,6 @@ shutil.copy2(".git/config", backup_repo_dir / ".git-config")
 files: list[str] = []
 if DO_DOC:
     files.extend(FILES_DOC)
-if DO_LOCK:
-    files.extend(FILES_LOCK)
 if DO_PACKAGES:
     files.extend(FILES_PACKAGES)
 if DO_TOOLS:
@@ -189,12 +182,10 @@ subprocess.run(cmd, check=True)
 shutil.move(backup_repo_dir / ".git-config", ".git/config")
 
 # Restore and commit files
-if DO_LOCK:
-    restore_and_commit(FILES_LOCK, backup_repo_dir, "chore(deps): Lock")
 if DO_PACKAGES:
-    restore_and_commit(FILES_PACKAGES, backup_repo_dir, "chore(deps): Packages")
+    restore_and_commit(FILES_PACKAGES, backup_repo_dir, "chore: Packages")
 if DO_DOC:
-    restore_and_commit(FILES_DOC, backup_repo_dir, "docs")
+    restore_and_commit(FILES_DOC, backup_repo_dir, "Docs")
 if DO_TOOLS:
     restore_and_commit(FILES_TOOLS, backup_repo_dir, "chore: Tools")
 
