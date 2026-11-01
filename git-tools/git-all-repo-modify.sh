@@ -5,7 +5,7 @@ set -e
 
 for D in */; do
   # skip dirs starting with zzz_ as well as hpmor-de/
-  if [[ $D == zzz_*/ || $D == hpmor-de/ ]]; then
+  if [[ $D == zzz_*/ || $D == hpmor-de/ || $D == arduino-sensorics/ || $D == readout_MT681_electricity_meter/ ]]; then
     # || $D == korrekturleser/
     continue
   fi
@@ -14,7 +14,14 @@ for D in */; do
   echo "=== $D ===="
   echo "==="
   cd "$D"
-  python ../git-hist-cleanup.py
+  git pull || true
+  prek run --all-files --quiet || true
+  if [[ -f .github/dependabot.yml ]]; then
+    git add .github/dependabot.yml || true
+    git commit -m "dependabot.yml" || true
+    git push || true
+  fi
+  # python ../git-hist-cleanup.py
   # git pull || true
   # prek autoupdate --cooldown-days 7
   # prek run --all-files --quiet || true
