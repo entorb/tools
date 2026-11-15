@@ -15,13 +15,18 @@ for D in */; do
   echo "==="
   cd "$D"
   git pull || true
-  prek run --all-files --quiet || true
-  if [[ -f .github/dependabot.yml ]]; then
-    git add .github/dependabot.yml || true
-    git commit -m "dependabot.yml" || true
-    git push || true
-  fi
-  # python ../git-hist-cleanup.py
+  # Update pnpm to latest version
+  # pnpm self-update
+  #
+  # prek run --all-files --quiet || true
+  # if [[ -f .github/dependabot.yml ]]; then
+  #   git add .github/dependabot.yml || true
+  #   git commit -m "dependabot.yml" || true
+  #   git push || true
+  # fi
+
+  python ../git-hist-cleanup.py
+
   # git pull || true
   # prek autoupdate --cooldown-days 7
   # prek run --all-files --quiet || true
