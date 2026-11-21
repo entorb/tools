@@ -18,9 +18,9 @@ REPOS_DIR = Path.home() / "GitHub"
 BACKUP_DIR_ZIP = REPOS_DIR / "zzz_backup"
 BACKUP_DIR_ZIP.mkdir(parents=True, exist_ok=True)
 
-DO_DOC = False
+DO_DOC = True
 DO_PACKAGES = True
-DO_TOOLS = False
+DO_TOOLS = True
 
 print(f"\n{DO_DOC=}\n{DO_PACKAGES=}\n{DO_TOOLS=}\n")
 
@@ -86,6 +86,8 @@ FILES_PACKAGES = [
     "apps/pum/package.json",
     "apps/voc/package.json",
     "packages/shared/package.json",
+    # Rust
+    "Cargo.lock",
 ]
 
 # Clean up and create directories
@@ -184,10 +186,10 @@ shutil.move(backup_repo_dir / ".git-config", ".git/config")
 # Restore and commit files
 if DO_PACKAGES:
     restore_and_commit(FILES_PACKAGES, backup_repo_dir, "chore: Packages")
-if DO_DOC:
-    restore_and_commit(FILES_DOC, backup_repo_dir, "Docs")
 if DO_TOOLS:
     restore_and_commit(FILES_TOOLS, backup_repo_dir, "chore: Tools")
+if DO_DOC:
+    restore_and_commit(FILES_DOC, backup_repo_dir, "Docs")
 
 # Explicit cleanup (git-filter-repo usually does this already)
 subprocess.run(["git", "reflog", "expire", "--expire=now", "--all"], check=True)
