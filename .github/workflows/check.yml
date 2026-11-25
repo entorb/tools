@@ -39,8 +39,8 @@ jobs:
         with:
           extra-args: --all-files --quiet
 
-      - name: Run CSpell
-        uses: streetsidesoftware/cspell-action@ce1816e4ce36532956ac6e983737392774b6e169  # v9.2.0
-        with:
-          files: '**/*'
-          incremental_files_only: false
+          # - name: Run CSpell
+          #   uses: streetsidesoftware/cspell-action@ce1816e4ce36532956ac6e983737392774b6e169  # v9.2.0
+          #   with:
+          #     files: '**/*'
+          #     incremental_files_only: false

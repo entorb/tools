@@ -28,6 +28,7 @@ pyinstaller
 pyproject
 pyupgrade
 raspi
+redate
 reflog
 rstrip
 rumdl
