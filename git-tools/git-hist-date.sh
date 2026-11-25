@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# change commit date for all commits after a given commit SHA
+# Change commit dates for all commits after a given commit SHA.
+# Usage: ./redate.sh [SHA] [NEW_DATE]
+#   SHA       defaults to the value below
+#   NEW_DATE  ISO 8601 (e.g. 2026-11-24T12:27:00) or "NOW" (default)
 
-SHA="5caece35c73c68389ff3866634bcaca3b1302785"
-NEW_DATE="2026-10-11T12:34:56"
+DEFAULT_SHA="d231223938087771d6767363b9837192c21b9ad6"
+
+SHA="${1:-$DEFAULT_SHA}"
+NEW_DATE="${2:-NOW}"
+
+if [[ "$NEW_DATE" == "NOW" ]]; then
+  NEW_DATE="$(date +%Y-%m-%dT%H:%M:%S)"
+fi
 
 export NEW_DATE
 
